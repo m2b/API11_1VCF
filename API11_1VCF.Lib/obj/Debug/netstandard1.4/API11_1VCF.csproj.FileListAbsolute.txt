@@ -1,0 +1,7 @@
+/Users/blackie/Documents/code/API11_1VCF/APIVCFLib/bin/Debug/netstandard1.4/API11_1VCF.deps.json
+/Users/blackie/Documents/code/API11_1VCF/APIVCFLib/bin/Debug/netstandard1.4/API11_1VCF.dll
+/Users/blackie/Documents/code/API11_1VCF/APIVCFLib/bin/Debug/netstandard1.4/API11_1VCF.pdb
+/Users/blackie/Documents/code/API11_1VCF/APIVCFLib/obj/Debug/netstandard1.4/API11_1VCF.csproj.CoreCompileInputs.cache
+/Users/blackie/Documents/code/API11_1VCF/APIVCFLib/obj/Debug/netstandard1.4/API11_1VCF.AssemblyInfo.cs
+/Users/blackie/Documents/code/API11_1VCF/APIVCFLib/obj/Debug/netstandard1.4/API11_1VCF.dll
+/Users/blackie/Documents/code/API11_1VCF/APIVCFLib/obj/Debug/netstandard1.4/API11_1VCF.pdb

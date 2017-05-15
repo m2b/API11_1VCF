@@ -1,0 +1,24 @@
+﻿<Properties StartupConfiguration="{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API11_1VCF.Lib/RulesLoader.cs">
+    <Files>
+      <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" Line="1" Column="1" />
+      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="1" Column="1" />
+      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="4" Column="17" />
+      <File FileName="API11_1VCF.Lib/Lib.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" relfile="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" line="157" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <DisabledProjects>
+    <String>APIVCFLib/API11_1VCF.csproj</String>
+    <String>API11_1VCF/API11_1VCF_Sandbox.csproj</String>
+    <String>APIVCF.Test/API11_1VCF.Test.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.ItemProperties.API11__1VCF.Sandbox PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

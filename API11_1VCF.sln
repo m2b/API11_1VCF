@@ -1,0 +1,36 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API11_1VCF.Sandbox", "API11_1VCF.Sandbox\API11_1VCF.Sandbox.csproj", "{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API11_1VCF.Lib", "API11_1VCF.Lib\API11_1VCF.Lib.csproj", "{DDE15531-8F8A-4FCD-88A3-EC4202D93955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API11_1VCF.Test", "API11_1VCF.Test\API11_1VCF.Test.csproj", "{7F462526-45B7-42EB-A739-8D0FC8EE43C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.VersionControlPolicy = $1
+		$0.DotNetNamingPolicy = $2
+		$2.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$0.StandardHeader = $3
+	EndGlobalSection
+EndGlobal
