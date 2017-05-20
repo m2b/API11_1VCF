@@ -1,16 +1,37 @@
 ﻿<Properties StartupConfiguration="{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="API11_1VCF.Lib/RulesLoader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API11_1VCF.git Status">
     <Files>
-      <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" Line="1" Column="1" />
-      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="1" Column="1" />
-      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="4" Column="17" />
-      <File FileName="API11_1VCF.Lib/Lib.cs" Line="1" Column="1" />
+      <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" Line="292" Column="4" />
+      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="46" Column="1" />
+      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="110" Column="47" />
+      <File FileName="API11_1VCF.Lib/Lib.cs" Line="257" Column="1" />
+      <File FileName="LPGNGLSandbox/Program.cs" Line="33" Column="53" />
+      <File FileName="API11_1VCF.Lib/Conversions.cs" Line="50" Column="30" />
+      <File FileName="API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" Line="65" Column="25" />
+      <File FileName="API11_1VCF.git Status" />
     </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="API11_1VCF" expanded="True">
+            <Node name="API11_1VCF.Test" expanded="True" selected="True">
+              <Node name="APIVCF" expanded="True">
+                <Node name="CTLFromAPIDegFLiqGasTests" expanded="True" />
+                <Node name="CTPLFromAPIDegFPsigTests" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" relfile="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" line="157" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Sandbox/Program.cs" relfile="API11_1VCF.Sandbox/Program.cs" line="46" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" relfile="API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" line="113" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/Lib.cs" relfile="API11_1VCF.Lib/Lib.cs" line="211" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

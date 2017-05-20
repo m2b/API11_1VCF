@@ -1,11 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace APIVCF
 {
     public enum VARIABLE_TYPE {DENSITY,TEMPERATURE,PRESSURE,THERMAL_EXPANSION_COEFF,CTL,SCALED_COMPRESSIBILITY_FACTOR,CPL,CTPL};
-    public enum COMMODITY_GROUP { ANY, CRUDE_OIL, FUEL_OILS, JET_FUELS, TRANSITION_ZONE, GASOLINES, LUBRICATING_OIL,GENERALIZED_REFINED_PRODUCT };
+    public enum COMMODITY_GROUP { ANY, CRUDE_OIL, FUEL_OILS, JET_FUELS, TRANSITION_ZONE, GASOLINES, LUBRICATING_OIL,GENERALIZED_REFINED_PRODUCT,LPG_NGL };
     public enum COMPARE { INCLUDE, INSIDE}; // meaning include = in comparing 
+    public enum LIQ_GAS_FLUID {EE_68_32=1,ETHANE,EP_65_35,EP_35_65,PROPANE,iBUTANE,nBUTANE,iPENTANE,nPENTANE,iHEXANE,nHEXANE,nHEPTANE }
+
+    // API 11.2.4 Section 5.1.1.3 Table 1
+    public class LiqGasProperties
+    {
+        public LIQ_GAS_FLUID Fluid;
+        public double relDens60; // SG at 60
+        public double tempCritK; // Deg Kelvin
+        public double comprFactCrit; 
+        public double densCrit; // Gram Moles per Liter
+        public double k1;  // Saturation fitting parameters
+        public double k2;
+        public double k3;
+        public double k4;
+    }
 
     public class ValueLimit
     {
@@ -46,12 +62,14 @@ namespace APIVCF
     {
         Dictionary<string, UnitOfMeasure> uoms = new Dictionary<string, UnitOfMeasure>();
         Dictionary<COMMODITY_GROUP, KCoeffs> kCoeffs = new Dictionary<COMMODITY_GROUP, KCoeffs>();
+        Dictionary<LIQ_GAS_FLUID, LiqGasProperties> lgProps = new Dictionary<LIQ_GAS_FLUID, LiqGasProperties>();
 
         // Constructor
         public Calcs()
         {
             loadUoMs();
             loadKCoeffs();
+            loadLiqGasProperties();
         }
 
         #region Public methods
@@ -59,14 +77,14 @@ namespace APIVCF
         // Section 11.1.2.2 - Equation 16
         public double GetThermExpCoeff60(double densITPS68, KCoeffs coeffs)
         {
-            double alpha60 = coeffs.k0 / Math.Pow(densITPS68, 2) + coeffs.k1 / densITPS68 + coeffs.k2;
+            double alpha60 = coeffs.k0 / (densITPS68*densITPS68) + coeffs.k1 / densITPS68 + coeffs.k2;
             return alpha60;
         }
 
 		// Section 11.1.6.1 - Step 6
 		public double  GetCompressFactor(double densITPS68,double tempITPS68)
 		{
-            double fp = Math.Exp(-1.9947 + 0.00013427 * tempITPS68 + (793920 + 2326.0 * tempITPS68) / Math.Pow(densITPS68,2));
+            double fp = Math.Exp(-1.9947 + 0.00013427 * tempITPS68 + (793920 + 2326.0 * tempITPS68) / (densITPS68 * densITPS68));
             return fp;
 		}
 
@@ -76,7 +94,11 @@ namespace APIVCF
             return kCoeffs[cgroup];
         }
 
-        // Section 
+        // API 11.2.4 Section 5.1.1.3 Table 1
+        public LiqGasProperties GetLiqGasProps(LIQ_GAS_FLUID fluid)
+        {
+            return lgProps[fluid];
+        }
 
         // Section 11.1.6.1  CTPL (commonly known as VCF)
         public double GetCTPLFromAPIDegFPsig(COMMODITY_GROUP grp,double api60,double tempF,double presPsig=0)
@@ -114,17 +136,31 @@ namespace APIVCF
             // Step 8
             double CTPL = CTL * CPL;
 
-
-            return RoundUp(CTPL,"CTPL");
+            return RoundUpAPI11_1(CTPL,"CTPL");
         }
 
 
-        // Section 11.1.3.5 
-        // Coeff of Thermal Expansion
-        public double GetCoeffOfThermExp()
-        {
-            throw (new NotImplementedException());
-        }
+		// API 12.2.2 - Section 11  CTPL (commonly known as VCF)
+        public double GetCTPLFromAPIDegFPsigLiqGas(double api60, double tempF, double pressPsig,double vapPressPsig)
+		{
+            // Fix press to vapPress if higher
+            if (pressPsig < vapPressPsig)
+                pressPsig = vapPressPsig;
+
+            // Determine CTL - Compute temperature correction factor
+            double CTL = GetCTLLiqGas(tempF, api60);
+
+            // Determine F - Compute compressibility factor
+            double Fp = GetCompressFactorLiqGas(tempF, api60, pressPsig, vapPressPsig, out double  A, out double B);
+
+            // Determine CPL - Compute pressure correction
+            double CPL = GetCPLLiquidGas(Fp, pressPsig, vapPressPsig);	
+
+			// Determine Combined coefficient
+			double CTPL = CTL * CPL;
+
+			return RoundUp(CTPL, -5);
+		}
 
 		// Section 11.1.3.3. Equation 14 and Section 11.1.1.6 Step 5        
         // Temperature compensation CTL
@@ -135,6 +171,140 @@ namespace APIVCF
             return ctl;
 		}
 
+        // API 11.2.4 Section 5.1.1.3
+        // Temperature compensation CTL
+        public double GetCTLLiqGas(double tempF,double api60)
+        {
+			// Step T24/3
+			// Check Density and Temperature range
+			COMMODITY_GROUP grp = COMMODITY_GROUP.LPG_NGL;
+            checkRange(api60, "API", grp);
+			checkRange(tempF, "degF", grp); // Group must be specified
+
+            // Step T24/2
+            // Convert temp to Kelvin and roundup
+            tempF = RoundUp(tempF, -1);
+			double Tx = Conversions.DegFtoDegK(tempF);
+
+            // Convert to relative density and roundup
+			double relDens60 = Conversions.APItoSG(api60);
+            relDens60 = RoundUp(relDens60, -4);
+
+            // Step T24/4
+            // Chose reference fluid subscripts (1,2)
+            LiqGasProperties f1=null;
+            LiqGasProperties f2=null;
+            LiqGasProperties prev=null;
+            foreach(var lgProp in lgProps)
+            {
+                if (prev!=null)
+                {
+                    if (lgProp.Value.relDens60>=relDens60)
+                    {
+                        f2 = lgProp.Value;
+                        f1 = prev;
+                        break;
+                    }
+                }
+                prev = lgProp.Value;
+            }
+            if (f2 == null || f1==null)
+                throw (new ArgumentException(String.Format("Relative density {0} is out of the range of API 11.2.4 Table 1",api60)));
+
+            // Step T24/5 
+            // Compute interpolation variable
+            double delta = (relDens60 - f1.relDens60) / (f2.relDens60 - f1.relDens60);
+
+            // Step T24/6
+            // Compute interpolated critical temperature
+            double Tc= f1.tempCritK + delta * (f2.tempCritK - f1.tempCritK);
+
+            // Step T24/7
+            // Compute reduced temperature ratio
+            double Trx = Tx / Tc;
+            if (Trx > 1)
+                throw (new ArgumentException(String.Format("Temperature {0} will result in supercritical conditions which are not supported by this computation", tempF)));
+
+            // Step 24/8
+            // Compute reduced temperature at 60F
+            double t60K = Conversions.DegFtoDegK(60);
+            double Tr60 = t60K/Tc;
+
+            // Step 24/9
+            // Compute scaling factor
+            double h2 = (f1.comprFactCrit * f1.densCrit) / (f2.comprFactCrit * f2.densCrit);
+
+            // Step 24/10
+            // Compute saturation density of both fluids at 60F
+            double dens60_1 = getSatDensityAtTemp(Tr60, f1);
+			double dens60_2 = getSatDensityAtTemp(Tr60, f2);
+
+            // Step 24/11
+            // Calculate interpolating factor
+            Func<double,double,double> ratio = (dens1,dens2) => dens1/(1 + delta * (dens1 / (h2 * dens2) - 1));
+            double X = ratio(dens60_1,dens60_2);
+
+            // Step 24/12
+            // Opbtain saturation density of both fluids at Trx
+            double densX_1 = getSatDensityAtTemp(Trx, f1);
+			double densX_2 = getSatDensityAtTemp(Trx, f2);
+
+            // Step 24/13
+            // Obtain CTL
+            double CTL = ratio(densX_1,densX_2)/X;
+
+            return CTL;
+        }
+
+        // API 11.2.2M Section 11.2.2.6M Basic Model
+        public double GetCompressFactorLiqGas(double tempF,double api60,double pressPsig,double vaporPressPsig,out double A,out double B)
+        {
+			// API 11.2.2M - Section 11.2.8.1M Step 10
+			// Check near critical temperature
+			double tr = Conversions.DegFtoDegR(tempF);
+			double tc = getCriticalTemperature(api60);
+			if (tr > 0.960 * tc)
+				throw (new ArgumentException(String.Format("Temperature {0} degR must be less than or equal to near (96%) of Critical Temperature {1} degR", tr, tc)));
+
+            double A1 = -2.1465891e-6;
+            double A2 = 1.5774390e-5;
+            double A3 = -1.0502139e-5;
+            double A4 = 2.8324481e-7;
+            double A5 = -0.95495939;
+            double A6 = 7.2900662e-8;
+            double A7 = -2.7769343e-7;
+            double A8 = 0.03645838;
+            double A9 = -0.05110158;
+            double A10 = 0.00795529;
+            double A11 = 9.13114910;
+            double B1 = -6.0357667e-10;
+            double B2 = 2.2112678e-6;
+            double B3 = 0.00088384;
+            double B4 = -0.00204016;
+            double TR = Conversions.DegFtoDegR(tempF);
+            double TR2 = TR*TR;
+            double TR3 = TR2*TR;
+            double G = Conversions.APItoSG(api60);
+            double G2 = G*G;
+            double G4 =G2*G2;
+            double G6 = G2*G4;
+
+            A = (A1 * TR2) + (A2 * TR2 * G2) + (A3 * TR2 * G4) + (A4 * TR3 * G6) + A5 + (A6 * TR3 * G2) + (A7 * TR3 * G4) + (A8 * TR * G2) + (A9 * TR * G) + (A10 * TR) + (A11 * G);
+            // This is to convert the factor to Kilopascals for the case that dP will be in Kilopascals
+            // A = A * 6.894757; // Smith meter TP06005 rev 0.2 (3/11) is wrong in assuming this is only if temp is degC vs Rankine.  There is no linear correlation!
+            A = A * 100000;
+            // A = (int)(A * 100000 + 0.5);  // Round up to nearest whole number if needed on a table
+            B = (B1 * TR2) + (B2 * TR * G2) + (B3 * G) + (B4 * G2);
+            B = B * 100000;
+            // B = (int)(B * 100000000.0 + 0.5) * 0.001;  // Round up to nearest 0.001
+
+			double dP = pressPsig - vaporPressPsig;    
+
+            double F = 1/(A + (dP > 0 ? dP : 0)*B);
+
+            return F;
+        }
+
 		// Section 11.1.3.3. Equation 15 and Section 11.1.1.6 Step 7
 		// Pressure compensation CPL
         public double GetCPL(double compressFactor,double pressPsig)
@@ -143,32 +313,67 @@ namespace APIVCF
 			return cpl;
 		}
 
-        // Roundup calculations
-        // Section 11.1.5.4 Rounding of Values
-        public double RoundUp(double val, string units)
+        // API 11.2.2M Section 11.2.2.6M Basic Model
+        // Presure compensation CPL
+		public double GetCPLLiquidGas(double compressFactor, double pressPsig,double vapPress)
+		{
+            double deltaP = pressPsig - vapPress;
+            double cpl = 1 / (1 - compressFactor * (deltaP < 0 ? 0 :deltaP));
+			return cpl;
+		}
+
+		// Roundup calculations
+		// Section 11.1.5.4 Rounding of Values
+		public double RoundUpAPI11_1(double val, string units)
         {
             // Validate
             UnitOfMeasure uom = null;
             if (!uoms.TryGetValue(units.ToLower(), out uom))
                 throw (new ArgumentException("Units {0} not recognized or supported"));
 
-            // Find delta
-            var delta = uom.Precision;
+            // Round up
+            return RoundUpAPI11_1(val,uom.Precision);
+        }
 
-			// Compute norm
-            double norm = Math.Abs(val)/delta;
+		public double RoundUpAPI11_1(double val, double precision)
+        {
+            var delta = precision;
+
+            // Compute norm
+            double invDelta = (1 / delta);
+			double norm = invDelta*Math.Abs(val);
+
+			// Store sign
+			double sign = val < 0 ? -1.0 : 1.0;
+
+			// Convert to integer
+			double i = Math.Truncate(norm + 0.5);
+			double inorm = Math.Truncate(norm);
+			if ((norm - inorm).CompareTo(0.5) == 0)  // Fraction of norm is exactly 0.5
+			{
+				if (((long)inorm) % 2 == 0)  // Is even
+					i = inorm;
+			}
+
+			// Rescale
+			double x = sign * delta * i;
+
+			return x;
+		}
+
+        public double RoundUp(double val, int pow10)
+        {
+            var delta = Math.Pow(10,pow10);
+
+            // Compute norm
+            var invDelta = 1 / delta;
+            double norm = invDelta*Math.Abs(val);
 
             // Store sign
             double sign = val < 0 ? -1.0 : 1.0;
 
-            // Convert to integer
-            double i = Math.Truncate(norm+0.5);
-            double inorm = Math.Truncate(norm);
-            if((norm-inorm).CompareTo(0.5)==0)  // Fraction of norm is exactly 0.5
-            {
-                if(((long)inorm)%2==0)  // Is even
-                    i = inorm;
-            }
+            // Round
+            double i = Math.Round(norm);
 
             // Rescale
             double x = sign * delta * i;
@@ -176,18 +381,41 @@ namespace APIVCF
             return x;
         }
 
-        #endregion
+		#endregion
 
-        #region Private methods
+		#region Private methods
+
+		double getSatDensityAtTemp(double tempK, LiqGasProperties props)
+        {
+			double tau = 1 - tempK;
+			double tau35 = Math.Pow(tau, 0.35);
+			double tau2 = tau * tau;
+			double tau3 = tau * tau2;
+			double tau65 = Math.Pow(tau, 0.65);
+            double dens = props.densCrit * (1 + (props.k1 * tau35 + props.k3 * tau2 + props.k4 * tau3) / (1 + props.k2 * tau65));
+            return dens;
+        }
 
         void loadUoMs()
         {
             uoms = RulesLoader.GetUoMs();
         }
+
 		void loadKCoeffs()
 		{
             kCoeffs = RulesLoader.GetKCoeffs();
 		}
+
+		void loadLiqGasProperties()
+		{
+            lgProps = RulesLoader.GetLiqGasProperties();
+		}
+
+        double getCriticalTemperature(double api60)
+        {
+            double tc = 621.418 - 822.686 * api60 + 1737.86 * api60 * api60;
+            return tc;
+        }
 
         void checkRange(double val,string units,COMMODITY_GROUP grp=COMMODITY_GROUP.ANY)
         {
@@ -200,8 +428,9 @@ namespace APIVCF
             if (uom.Limits == null || uom.Limits.Count < 1)
                 return;
 
+            bool isLiquidGas = (grp == COMMODITY_GROUP.LPG_NGL);
             // Ignore commodity if limits are for ANY commodity
-            if(uom.Limits.ContainsKey(COMMODITY_GROUP.ANY))
+            if(!isLiquidGas && uom.Limits.ContainsKey(COMMODITY_GROUP.ANY))
             {
                 try
                 {
@@ -226,10 +455,10 @@ namespace APIVCF
 			{
                 throw (new ArgumentOutOfRangeException(String.Format("{0} with units={1} and commodity group={2}", e.Message, units,grp)));
 			}
+
             return;
         }
 
 		#endregion
 	}
-
 }

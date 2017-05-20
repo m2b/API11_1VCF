@@ -5,7 +5,8 @@ namespace APIVCF
 	public class Conversions
 	{
         public static readonly double densH20at60 = 999.016; // kg/m3 at 60 F
-        public static readonly double deltaT60 = 0.01374979547; // Temperature shift value at 60 F
+		public static double pressAtmPsi = 14.6959;  // At sea level
+		public static readonly double deltaT60 = 0.01374979547; // Temperature shift value at 60 F
         public static readonly double baseT60 = 60.0068749;
 		public static readonly double[] aCoeffs = { -0.148759, -0.267408, 1.080760, 1.269056, -4.089591, -1.871251, 7.438081, -3.536296 };
 
@@ -14,7 +15,7 @@ namespace APIVCF
 			double t = deg;
 			bool isF = uom.ToLower() == "degf";
 			if (isF)
-				t = DegFToDegC(t);
+				t = DegFtoDegC(t);
 			else if (uom.ToLower() != "degc")
 				throw (new ArgumentException("Units of measure {0} not supported - must be degC or degF"));
 			double tau = t / 630;
@@ -26,7 +27,7 @@ namespace APIVCF
             deltaT = deltaT * tau; // One last time
 			t = t - deltaT;
 			if (isF)
-				return DegCToDegF(t);
+				return DegCtoDegF(t);
 			return t;
 		}
 
@@ -46,12 +47,31 @@ namespace APIVCF
             return rhoITPS68;
         }
 
-		public static double DegCToDegF(double degC)
+        public static double DegFtoDegK(double degF)
+        {
+            return (degF + 459.67) / 1.8;
+        }
+
+		public static double DegFtoDegR(double degF)
+		{
+            return degF + 459.67;
+		}
+
+        public static double DegKtoDegF(double degK)
+        {
+            return 1.8 * degK - 459.67;
+        }
+
+		public static double DegRtoDegF(double degR)
+		{
+			return degR - 459.67;
+		}
+		public static double DegCtoDegF(double degC)
 		{
 			return 1.8 * degC + 32;
 		}
 
-		public static double DegFToDegC(double degF)
+		public static double DegFtoDegC(double degF)
 		{
 			return (degF - 32) / 1.8;
 		}
@@ -66,14 +86,28 @@ namespace APIVCF
 			return 141.5 / sg - 131.5;
 		}
 
+        public static double SGtoKgm3(double sg,double kgm3H20=-1)
+		{
+            if (kgm3H20 < 1)
+                kgm3H20 = densH20at60;
+            return sg*kgm3H20;
+		}
+
+        public static double Kgm3toSG(double kgm3,double kgm3H20=-1)
+		{
+			if (kgm3H20 < 1)
+				kgm3H20 = densH20at60;
+            return kgm3/kgm3H20;
+		}
+
         public static double PSItokPa(double psi)
         {
-            return 6.895 * psi;
+            return 6.894757 * psi;
         }
 
         public static double kPatoPSI(double kpa)
         {
-            return kpa / 6.895;
+            return kpa / 6.894757;
         }
 
         public static double PSItoBar(double psi)

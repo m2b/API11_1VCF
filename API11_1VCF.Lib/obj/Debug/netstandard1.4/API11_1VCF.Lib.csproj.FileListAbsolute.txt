@@ -9,8 +9,8 @@
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.deps.json
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.dll
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.pdb
-/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.csprojResolveAssemblyReference.cache
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.csproj.CoreCompileInputs.cache
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.AssemblyInfo.cs
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.dll
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.pdb
+/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.csprojResolveAssemblyReference.cache
