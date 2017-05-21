@@ -2,25 +2,18 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="API11_1VCF.git Status">
     <Files>
       <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" Line="292" Column="4" />
-      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="46" Column="1" />
-      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="110" Column="47" />
-      <File FileName="API11_1VCF.Lib/Lib.cs" Line="257" Column="1" />
-      <File FileName="LPGNGLSandbox/Program.cs" Line="33" Column="53" />
-      <File FileName="API11_1VCF.Lib/Conversions.cs" Line="50" Column="30" />
-      <File FileName="API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" Line="65" Column="25" />
+      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="1" Column="1" />
+      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="1" Column="1" />
+      <File FileName="API11_1VCF.Lib/Lib.cs" Line="1" Column="1" />
+      <File FileName="LPGNGLSandbox/Program.cs" Line="1" Column="1" />
+      <File FileName="API11_1VCF.Lib/Conversions.cs" Line="1" Column="1" />
+      <File FileName="API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" Line="1" Column="1" />
       <File FileName="API11_1VCF.git Status" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="API11_1VCF" expanded="True">
-            <Node name="API11_1VCF.Test" expanded="True" selected="True">
-              <Node name="APIVCF" expanded="True">
-                <Node name="CTLFromAPIDegFLiqGasTests" expanded="True" />
-                <Node name="CTPLFromAPIDegFPsigTests" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="API11_1VCF" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
