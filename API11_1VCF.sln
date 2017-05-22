@@ -13,24 +13,33 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		XHQ.itvizion.com|Any CPU = XHQ.itvizion.com|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.XHQ.itvizion.com|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}.XHQ.itvizion.com|Any CPU.Build.0 = Debug|Any CPU
 		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.XHQ.itvizion.com|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE15531-8F8A-4FCD-88A3-EC4202D93955}.XHQ.itvizion.com|Any CPU.Build.0 = Debug|Any CPU
 		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.XHQ.itvizion.com|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F462526-45B7-42EB-A739-8D0FC8EE43C1}.XHQ.itvizion.com|Any CPU.Build.0 = Debug|Any CPU
 		{94D98A74-6391-4853-95FC-882AD7510E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94D98A74-6391-4853-95FC-882AD7510E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94D98A74-6391-4853-95FC-882AD7510E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94D98A74-6391-4853-95FC-882AD7510E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94D98A74-6391-4853-95FC-882AD7510E55}.XHQ.itvizion.com|Any CPU.ActiveCfg = Debug|Any CPU
+		{94D98A74-6391-4853-95FC-882AD7510E55}.XHQ.itvizion.com|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

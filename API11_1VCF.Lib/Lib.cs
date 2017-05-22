@@ -91,13 +91,24 @@ namespace APIVCF
         // Section 11.1.6.1 Step 3 Ki Table
         public KCoeffs GetKCoeffs(COMMODITY_GROUP cgroup)
         {
-            return kCoeffs[cgroup];
+            KCoeffs coeffs=null;
+            if (!kCoeffs.TryGetValue(cgroup, out coeffs))
+                throw (new ArgumentException(String.Format("Coefficients for COMMODITY_GROUP {0} not found", cgroup)));
+            return coeffs;
         }
 
         // API 11.2.4 Section 5.1.1.3 Table 1
         public LiqGasProperties GetLiqGasProps(LIQ_GAS_FLUID fluid)
         {
             return lgProps[fluid];
+        }
+
+        // Convenient method to handle all in a single call
+        public double GetCTPLFromApiDegFPsig(COMMODITY_GROUP grp, double api60, double tempF, double presPsig = 0,double vapPress=0)
+        {
+            if (grp == COMMODITY_GROUP.LPG_NGL)
+                return GetCTPLFromAPIDegFPsigLiqGas(api60, tempF, presPsig, vapPress);
+            return GetCTPLFromAPIDegFPsig(grp, api60, tempF, presPsig);
         }
 
         // Section 11.1.6.1  CTPL (commonly known as VCF)

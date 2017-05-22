@@ -87,7 +87,10 @@ namespace APIVCF
             uom = "API";
             Console.WriteLine("Density {0} in {1} converts to {2} in SG",d,uom,Conversions.APItoSG(d));
             Console.WriteLine("Density {0} in {1} converts to {2} in kg/m3", d, uom, Conversions.APItoKgm3(d));
-            d = 1;
+            d = 1.8400000333786;
+			Console.WriteLine("Density {0} in {1} converts to {2} in SG", d, uom, Conversions.APItoSG(d));
+			Console.WriteLine("Density {0} in {1} converts to {2} in kg/m3", d, uom, Conversions.APItoKgm3(d));
+			d = 1;
             uom = "SG";
 			Console.WriteLine("Density {0} in {1} converts to {2} in API", d, uom, Conversions.SGtoAPI(d));
             Console.WriteLine("Density {0} in {1} converts to {2} in kg/m3", d, uom, Conversions.APItoKgm3(Conversions.SGtoAPI(d)));
