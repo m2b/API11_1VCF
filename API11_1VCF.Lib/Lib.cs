@@ -108,11 +108,11 @@ namespace APIVCF
         {
             if (grp == COMMODITY_GROUP.LPG_NGL)
                 return GetCTPLFromAPIDegFPsigLiqGas(api60, tempF, presPsig, vapPress);
-            return GetCTPLFromAPIDegFPsig(grp, api60, tempF, presPsig);
+            return GetCTPLFromApiDegFPsig(grp, api60, tempF, presPsig);
         }
 
         // Section 11.1.6.1  CTPL (commonly known as VCF)
-        public double GetCTPLFromAPIDegFPsig(COMMODITY_GROUP grp,double api60,double tempF,double presPsig=0)
+        public double GetCTPLFromApiDegFPsig(COMMODITY_GROUP grp,double api60,double tempF,double presPsig=0)
         {
             // Step 1 - Check range for density,temperature and pressure
             checkRange(api60, "API", grp);
@@ -391,6 +391,97 @@ namespace APIVCF
 
             return x;
         }
+
+
+        // API 11.1. - Section 11.1.3.5
+        const int MAXITERATIONS = 50;
+		public double GetDensity60FromDensity(COMMODITY_GROUP grp, double api, double tempF, out double CTPL, double presPsi=0, double vapPresPsi=0)
+		{
+            CTPL = 1.0;
+
+			if (tempF==60.0 && presPsi==0.0)
+				return api;
+
+            // Guess desired initially set to the same as input density
+            double api60 = api;
+            double apiGuessed = api;
+            // Iterate
+            int i = 0;
+            do
+            {
+                if(i>MAXITERATIONS)
+                    throw(new OperationCanceledException("Maximum iterations {0} have been exceeded when trying to compute api60 from api"));
+
+                api60 = api60 - 0.61803*(apiGuessed-api);  // Using golden ratio for simplicity
+
+				// Get CTPL using guessed number
+				CTPL = GetCTPLFromApiDegFPsig(grp, api60, tempF, presPsi, vapPresPsi);
+
+                // Get guessed api
+                apiGuessed = api60 / CTPL;
+
+                i++;
+            }
+            while (CTPL*Math.Abs(api-apiGuessed) > 0.1*uoms["api"].Precision);  // A little better than precision
+
+            // Check ranges
+            checkRange(api60, "api", grp);
+
+
+			// Return reached at api60
+			return api60;
+		}
+		
+        // API 11.1. - Equation (7)
+        public double GetDensityFromDensity60(COMMODITY_GROUP grp,double api60, double tempF,double presPsi=0,double vapPresPsi=0)
+        {
+            if (tempF==60.0 && presPsi==0.0)
+                return api60;
+
+            // Get CTPL
+            double CTPL = GetCTPLFromApiDegFPsig(grp, api60, tempF, presPsi, vapPresPsi);
+
+            // Use to computed API - Remember API is inverse of density
+            return api60/CTPL;
+        }
+
+        // API 12.1 - Tank Roof Corrections
+        public double GetBarrelsDueToTankRoof(COMMODITY_GROUP grp, double api60, double tempF, double presPsi=0, double vapPresPsi=0, double roofWgtLb = 0, double bblPerApi = 0, double refApi=0)
+        {
+            // Get CTPL
+            double CTPL = GetCTPLFromApiDegFPsig(grp, api60, tempF, presPsi, vapPresPsi);
+
+            return GetBarrelsDueToTankRoof(api60,CTPL,roofWgtLb,bblPerApi,refApi);
+        }
+
+		// API 12.1 - Tank Roof Corrections
+		public double GetBarrelsDueToTankRoof(double api60, double CTPL, double roofWgtLb = 0, double bblPerApi = 0, double refApi = 0)
+		{
+			double bblTankRoof = 0.0;
+
+			// Two cases: Straps include Roof Weight and Straps do not include tanks
+			if (bblPerApi > 0) // Straps include Roog Weight
+			{
+				// Get actual api at observed conditions
+				double api = api60 / CTPL;
+				bblTankRoof = (refApi - api) * bblPerApi;
+			}
+			else
+			{
+				// Get density
+				double dens60 = Conversions.APItoKgm3(api60);
+
+				// Get volume from roof in m3
+				double roofWgtKg = Conversions.LbToKg(roofWgtLb);
+				double roofVolM3 = roofWgtKg / (dens60 * CTPL);
+
+				// Convert to barrels to be substracted
+				bblTankRoof = -Conversions.M3toBBL(roofVolM3);
+			}
+
+			return bblTankRoof;
+		}
+
 
 		#endregion
 

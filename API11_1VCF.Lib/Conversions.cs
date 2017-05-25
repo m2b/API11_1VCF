@@ -10,6 +10,27 @@ namespace APIVCF
         public static readonly double baseT60 = 60.0068749;
 		public static readonly double[] aCoeffs = { -0.148759, -0.267408, 1.080760, 1.269056, -4.089591, -1.871251, 7.438081, -3.536296 };
 
+
+        public static double KgToLb(double kg)
+        {
+            return kg*2.2046226218;
+        }
+
+        public static double LbToKg(double lb)
+        {
+			return lb/2.2046226218;
+        }
+
+        public static double BBLtoM3(double bbl)
+        {
+            return bbl * 0.158987294928;
+        }
+
+        public static double M3toBBL(double m3)
+        {
+            return m3 / 0.158987294928;
+        }
+
 		public static double TempITS90toITPS68(double deg, string uom = "degF")
 		{
 			double t = deg;
@@ -140,6 +161,32 @@ namespace APIVCF
         {
             var sg = kgm3 / densH20at60;
             return SGtoAPI(sg);
+        }
+
+        public static double GalToM3(double gal)
+        {
+            return 0.00378541 * gal;   
+        }
+
+        public static double M3ToGal(double m3)
+        {
+            return m3 / 0.00378541;
+        }
+
+        public static double KgM3ToLbGal(double kgm3)
+        {
+            double lbm3 = KgToLb(kgm3);
+            double m3lb = 1 / lbm3;
+            double gallb = M3ToGal(m3lb);
+            return 1 / gallb;
+        }
+
+        public static double LbGalToKgM3(double lbgal)
+        {
+			double kggal = LbToKg(lbgal);
+            double galkg = 1 / kggal;
+            double m3kg = GalToM3(galkg);
+			return 1 / m3kg;
         }
 	}
 }

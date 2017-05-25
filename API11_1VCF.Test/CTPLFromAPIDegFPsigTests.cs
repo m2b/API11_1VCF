@@ -301,7 +301,7 @@ namespace APIVCF
             Assert.True(EqualsToPrecision(example1.CTL, CTL, 1.0e-12));
             double CPL = example1.PressPsig<=0?1.0:calc.GetCPL(compressFactor,example1.PressPsig);
 			Assert.True(EqualsToPrecision(example1.CPL, CPL, 1.0e-12));
-            double CTPL = calc.GetCTPLFromAPIDegFPsig(example1.Grp,example1.Api60, example1.TempF, example1.PressPsig);
+            double CTPL = calc.GetCTPLFromApiDegFPsig(example1.Grp,example1.Api60, example1.TempF, example1.PressPsig);
 			Assert.True(EqualsToPrecision(example1.CTPL, CTPL, 1.0e-5));
 
             coeffs=calc.GetKCoeffs(example2.Grp);
@@ -313,7 +313,7 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example2.CTL, CTL, 1.0e-12));
 			CPL = example2.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example2.PressPsig);
 			Assert.True(EqualsToPrecision(example2.CPL, CPL, 1.0e-12));
-			CTPL = calc.GetCTPLFromAPIDegFPsig(example2.Grp, example2.Api60, example2.TempF, example2.PressPsig);
+			CTPL = calc.GetCTPLFromApiDegFPsig(example2.Grp, example2.Api60, example2.TempF, example2.PressPsig);
 			Assert.True(EqualsToPrecision(example2.CTPL, CTPL, 1.0e-5));
 
             coeffs=calc.GetKCoeffs(example3.Grp);
@@ -325,7 +325,7 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example3.CTL, CTL, 1.0e-12));
 			CPL = example3.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example3.PressPsig);
 			Assert.True(EqualsToPrecision(example3.CPL, CPL, 1.0e-12));
-			CTPL = calc.GetCTPLFromAPIDegFPsig(example3.Grp, example3.Api60, example3.TempF, example3.PressPsig);
+			CTPL = calc.GetCTPLFromApiDegFPsig(example3.Grp, example3.Api60, example3.TempF, example3.PressPsig);
 			Assert.True(EqualsToPrecision(example3.CTPL, CTPL, 1.0e-5));
 
             coeffs=calc.GetKCoeffs(example4.Grp);
@@ -337,7 +337,7 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example4.CTL, CTL, 1.0e-12));
 			CPL = example4.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example4.PressPsig);
 			Assert.True(EqualsToPrecision(example4.CPL, CPL, 1.0e-12));
-			CTPL = calc.GetCTPLFromAPIDegFPsig(example4.Grp, example4.Api60, example4.TempF, example4.PressPsig);
+			CTPL = calc.GetCTPLFromApiDegFPsig(example4.Grp, example4.Api60, example4.TempF, example4.PressPsig);
 			Assert.True(EqualsToPrecision(example4.CTPL, CTPL, 1.0e-5));
 
             coeffs=calc.GetKCoeffs(example5.Grp);
@@ -349,7 +349,7 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example5.CTL, CTL, 1.0e-12));
 			CPL = example5.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example5.PressPsig);
 			Assert.True(EqualsToPrecision(example5.CPL, CPL, 1.0e-12));
-			CTPL = calc.GetCTPLFromAPIDegFPsig(example5.Grp, example5.Api60, example5.TempF, example5.PressPsig);
+			CTPL = calc.GetCTPLFromApiDegFPsig(example5.Grp, example5.Api60, example5.TempF, example5.PressPsig);
 			Assert.True(EqualsToPrecision(example5.CTPL, CTPL, 1.0e-5));
 
             coeffs=calc.GetKCoeffs(example6.Grp);
@@ -361,7 +361,7 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example6.CTL, CTL, 1.0e-12));
 			CPL = example6.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example6.PressPsig);
 			Assert.True(EqualsToPrecision(example6.CPL, CPL, 1.0e-12));
-			CTPL = calc.GetCTPLFromAPIDegFPsig(example6.Grp, example6.Api60, example6.TempF, example6.PressPsig);
+			CTPL = calc.GetCTPLFromApiDegFPsig(example6.Grp, example6.Api60, example6.TempF, example6.PressPsig);
 			Assert.True(EqualsToPrecision(example6.CTPL, CTPL, 1.0e-5));
 		}
 

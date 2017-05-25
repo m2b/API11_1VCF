@@ -98,6 +98,7 @@ namespace APIVCF
             uom = "kg/m3";
             Console.WriteLine("Density {0} in {1} converts to {2} in API", d, uom, Conversions.Kgm3toAPI(d));
             Console.WriteLine("Density {0} in {1} converts to {2} in SG", d, uom, Conversions.APItoSG(Conversions.Kgm3toAPI(d)));
+            Console.WriteLine("Density {0} in {1} converts to {2} in lb/gal", d, uom, Conversions.KgM3ToLbGal(d));
 			d = 610.6;
 			Console.WriteLine("Density {0} in {1} converts to {2} in API", d, uom, Conversions.Kgm3toAPI(d));
             Console.WriteLine("Density {0} in {1} converts to {2} in SG", d, uom, Conversions.APItoSG(Conversions.Kgm3toAPI(d)));
@@ -171,13 +172,13 @@ namespace APIVCF
             double api = Conversions.Kgm3toAPI(dens);
             grp = COMMODITY_GROUP.CRUDE_OIL;
 			Console.WriteLine("Testing for commodity group {0}", grp);
-            double vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);  // All good
+            double vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);  // All good
             Console.WriteLine("Values in range test completed");
             // Temp to low
             temp = -58.1;
             try
             {
-                vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+                vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
                 Console.WriteLine("Test for low temp for {0} failed", grp);
             }
             catch (ArgumentOutOfRangeException e)
@@ -188,7 +189,7 @@ namespace APIVCF
 			temp = 302.1;
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for high temp for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e) {
@@ -199,7 +200,7 @@ namespace APIVCF
 			pres = -0.1;
             try
             {
-                vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+                vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
                 Console.WriteLine("Test for low press for {0} failed", grp);
             }
             catch (ArgumentOutOfRangeException e)
@@ -210,7 +211,7 @@ namespace APIVCF
 			pres = 1500.1;
             try
             {
-                vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+                vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
                 Console.WriteLine("Test for high press for {0} failed", grp);
             }
             catch (ArgumentOutOfRangeException e)
@@ -223,7 +224,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for low density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -235,7 +236,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for high density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -248,14 +249,14 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			grp = COMMODITY_GROUP.FUEL_OILS;
 			Console.WriteLine("Testing for commodity group {0}", grp);
-			vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);  // All good
+			vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);  // All good
 			Console.WriteLine("Values in range test completed");
 			// Density too low
 			dens = 818.3126;
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for low density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -267,7 +268,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for high density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -278,14 +279,14 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
             grp = COMMODITY_GROUP.JET_FUELS;
 			Console.WriteLine("Testing for commodity group {0}", grp);
-			vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);  // All good
+			vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);  // All good
 			Console.WriteLine("Values in range test completed");
 			// Density too low
 			dens = 787.5194;
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for low density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -297,7 +298,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for high density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -308,14 +309,14 @@ namespace APIVCF
             api = Conversions.Kgm3toAPI(dens);
 			grp = COMMODITY_GROUP.TRANSITION_ZONE;
 			Console.WriteLine("Testing for commodity group {0}", grp);
-			vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);  // All good
+			vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);  // All good
 			Console.WriteLine("Values in range test completed");
 			// Density too low
 			dens = 770.351;
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for low density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -327,7 +328,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for high density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -338,14 +339,14 @@ namespace APIVCF
             api = Conversions.Kgm3toAPI(dens);
             grp = COMMODITY_GROUP.GASOLINES;
 			Console.WriteLine("Testing for commodity group {0}", grp);
-			vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);  // All good
+			vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);  // All good
 			Console.WriteLine("Values in range test completed");
 			// Density too low
 			dens = 610.5;
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for low density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -357,7 +358,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for high density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -368,14 +369,14 @@ namespace APIVCF
             api = Conversions.Kgm3toAPI(dens);
             grp = COMMODITY_GROUP.LUBRICATING_OIL;
 			Console.WriteLine("Testing for commodity group {0}", grp);
-			vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);  // All good
+			vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);  // All good
 			Console.WriteLine("Values in range test completed");
 			// Density too low
 			dens = 800.8;
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for low density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -387,7 +388,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsig(grp, api, temp, pres);
+				vcf = calc.GetCTPLFromApiDegFPsig(grp, api, temp, pres);
 				Console.WriteLine("Test for high density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
