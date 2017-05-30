@@ -1,13 +1,13 @@
 ﻿<Properties StartupConfiguration="{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="API11_1VCF.git Status">
     <Files>
-      <File FileName="API11_1VCF.Lib/Lib.cs" Line="480" Column="1" />
-      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="101" Column="76" />
-      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="21" Column="80" />
+      <File FileName="API11_1VCF.Lib/Lib.cs" Line="517" Column="31" />
+      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="88" Column="104" />
+      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="69" Column="40" />
       <File FileName="API11_1VCF.Test/DensityCalcsTest.cs" Line="129" Column="55" />
-      <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" Line="130" Column="1" />
-      <File FileName="API11_1VCF.Lib/Conversions.cs" Line="154" Column="30" />
-      <File FileName="API11_1VCF.Test/FloatingRoofCalcsTest.cs" Line="51" Column="32" />
+      <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" Line="513" Column="63" />
+      <File FileName="API11_1VCF.Lib/Conversions.cs" Line="93" Column="4" />
+      <File FileName="API11_1VCF.Test/FloatingRoofCalcsTest.cs" Line="64" Column="46" />
       <File FileName="API11_1VCF.git Status" />
     </Files>
     <Pads>
@@ -16,10 +16,9 @@
           <Node name="API11_1VCF" expanded="True">
             <Node name="API11_1VCF.Test" expanded="True">
               <Node name="APIVCF" expanded="True">
+                <Node name="CTPLFromAPIDegFPsigTests" expanded="True" selected="True" />
                 <Node name="DensityCalcsTests" expanded="True" />
-                <Node name="FloatingRoofCalcsTests" expanded="True">
-                  <Node name="TestTankRoofVolumeCorrection" selected="True" />
-                </Node>
+                <Node name="FloatingRoofCalcsTests" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -30,10 +29,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" relfile="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" line="157" column="1" />
       <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" relfile="API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" line="113" column="1" />
       <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/CustomerDataTests/Program.cs" relfile="CustomerDataTests/Program.cs" line="38" column="1" />
       <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/FloatingRoofCalcsTest.cs" relfile="API11_1VCF.Test/FloatingRoofCalcsTest.cs" line="67" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" relfile="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" line="244" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
