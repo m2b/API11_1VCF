@@ -144,7 +144,61 @@ namespace APIVCF
                         CTL=1.026475833518,
                         CPL=1.012417396817,
                         CTPL=1.03922
-                    }
+					},                    
+                    // Section 11.1.6.1 - Example 4 repeated with Generalized Refined Product
+                    new TestData
+					{
+						TempF=85,
+						PressPsig=247.3,
+                        Grp=COMMODITY_GROUP.GENERALIZED_REFINED_PRODUCT,
+						Api60=Conversions.SGtoAPI(0.7943),
+						K0=330.301000000000,
+						K1=0.000000000000,
+						K2=0.000000000000,
+						TempITPS68=85.013358222928,
+						DensITSP68=793.521270459968,
+						ThermExpCoeff60=0.000524557068,
+						CompressFactor=0.664706197066,
+						CTL=0.986832406683,
+						CPL=1.001646525013,
+						CTPL=0.98846
+					},
+                    // Section 11.1.6.1 - Example 5 repeated with Generalized Refined Product
+                    new TestData
+					{
+						TempF=55.9,
+						PressPsig=350,
+                        Grp=COMMODITY_GROUP.GENERALIZED_REFINED_PRODUCT,
+						Api60=48.0015,
+						K0=1.48906700000e+3,
+						K1=0.000000000000,
+						K2=-0.001868400000,
+						TempITPS68=55.905838569594,
+						DensITSP68=787.521450184768,
+						ThermExpCoeff60=0.000532585048,
+						CompressFactor=0.608111538634,
+						CTL=1.002182725702,
+						CPL=1.002132930093,
+						CTPL=1.00432
+					},
+                    // Section 11.1.6.1 - Example 6 Repeated with Generalized Refined Product
+                    new TestData
+					{
+						TempF=27.3,
+						PressPsig=1234.5,
+                        Grp=COMMODITY_GROUP.GENERALIZED_REFINED_PRODUCT,
+						Api60=Conversions.Kgm3toAPI(657.3),
+						K0=192.457100000000,
+						K1=0.243800000000,
+						K2=0.000000000000,
+						TempITPS68=27.298898616759,
+						DensITSP68=657.303689061482,
+						ThermExpCoeff60=0.000816362130,
+						CompressFactor=0.993527440282,
+						CTL=1.026475833518,
+						CPL=1.012417396817,
+						CTPL=1.03922
+					}
                 };
 			}
         }
@@ -152,7 +206,8 @@ namespace APIVCF
 
 		[Theory]
         [MemberData(nameof(TestDataGenerator.GetTestExamples), MemberType = typeof(TestDataGenerator))]
-        public void TestKCoeffs(TestData example1,TestData example2,TestData example3,TestData example4,TestData example5,TestData example6)
+        public void TestKCoeffs(TestData example1,TestData example2,TestData example3,TestData example4,TestData example5,TestData example6,
+                                TestData example7,TestData example8,TestData example9)
 		{
             Calcs calc = new Calcs();
 
@@ -186,11 +241,26 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example6.K1, coeffs.k1, 1.0e-12));
 			Assert.True(EqualsToPrecision(example6.K2, coeffs.k2, 1.0e-12));
 
+            coeffs = calc.GetKCoeffs(example7.Grp,example7.Api60);
+			Assert.True(EqualsToPrecision(example7.K0, coeffs.k0, 1.0e-12));
+			Assert.True(EqualsToPrecision(example7.K1, coeffs.k1, 1.0e-12));
+			Assert.True(EqualsToPrecision(example7.K2, coeffs.k2, 1.0e-12));
+
+            coeffs = calc.GetKCoeffs(example8.Grp,example8.Api60);
+			Assert.True(EqualsToPrecision(example8.K0, coeffs.k0, 1.0e-12));
+			Assert.True(EqualsToPrecision(example8.K1, coeffs.k1, 1.0e-12));
+			Assert.True(EqualsToPrecision(example8.K2, coeffs.k2, 1.0e-12));
+
+            coeffs = calc.GetKCoeffs(example9.Grp,example9.Api60);
+			Assert.True(EqualsToPrecision(example9.K0, coeffs.k0, 1.0e-12));
+			Assert.True(EqualsToPrecision(example9.K1, coeffs.k1, 1.0e-12));
+			Assert.True(EqualsToPrecision(example9.K2, coeffs.k2, 1.0e-12));
 		}
 
 		[Theory]
 		[MemberData(nameof(TestDataGenerator.GetTestExamples), MemberType = typeof(TestDataGenerator))]
-		public void TestITPS68Conditions(TestData example1, TestData example2, TestData example3, TestData example4, TestData example5, TestData example6)
+		public void TestITPS68Conditions(TestData example1, TestData example2, TestData example3, TestData example4, TestData example5, TestData example6,
+                                        TestData example7,TestData example8,TestData example9)
 		{
 			Calcs calc = new Calcs();
 
@@ -229,11 +299,31 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example6.TempITPS68, tempITPS68, 1.0e-12));
 			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example6.Api60, coeffs);
 			Assert.True(EqualsToPrecision(example6.DensITSP68, densITPS68, 1.0e-12));
-		}
+
+            coeffs = calc.GetKCoeffs(example7.Grp,example7.Api60);
+			tempITPS68 = Conversions.TempITS90toITPS68(example7.TempF);
+			Assert.True(EqualsToPrecision(example7.TempITPS68, tempITPS68, 1.0e-12));
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example7.Api60, coeffs);
+			Assert.True(EqualsToPrecision(example7.DensITSP68, densITPS68, 1.0e-12));
+
+            coeffs = calc.GetKCoeffs(example8.Grp,example8.Api60);
+			tempITPS68 = Conversions.TempITS90toITPS68(example8.TempF);
+			Assert.True(EqualsToPrecision(example8.TempITPS68, tempITPS68, 1.0e-12));
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example8.Api60, coeffs);
+			Assert.True(EqualsToPrecision(example8.DensITSP68, densITPS68, 1.0e-12));
+
+            coeffs = calc.GetKCoeffs(example9.Grp,example9.Api60);
+			tempITPS68 = Conversions.TempITS90toITPS68(example9.TempF);
+			Assert.True(EqualsToPrecision(example9.TempITPS68, tempITPS68, 1.0e-12));
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example9.Api60, coeffs);
+			Assert.True(EqualsToPrecision(example9.DensITSP68, densITPS68, 1.0e-12));
+        
+        }
 
 		[Theory]
 		[MemberData(nameof(TestDataGenerator.GetTestExamples), MemberType = typeof(TestDataGenerator))]
-		public void TestThermExpAndCompress(TestData example1, TestData example2, TestData example3, TestData example4, TestData example5, TestData example6)
+		public void TestThermExpAndCompress(TestData example1, TestData example2, TestData example3, TestData example4, TestData example5, TestData example6,
+                                            TestData example7, TestData example8, TestData example9)
 		{
 			Calcs calc = new Calcs();
 
@@ -284,11 +374,37 @@ namespace APIVCF
 			tempITPS68 = Conversions.TempITS90toITPS68(example6.TempF);
 			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
 			Assert.True(EqualsToPrecision(example6.CompressFactor, compressFactor, 1.0e-12));
-		}
+
+            coeffs = calc.GetKCoeffs(example7.Grp,example7.Api60);
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example7.Api60, coeffs);
+			thermExpCoeff60 = calc.GetThermExpCoeff60(densITPS68, coeffs);
+			Assert.True(EqualsToPrecision(example7.ThermExpCoeff60, thermExpCoeff60, 1.0e-12));
+			tempITPS68 = Conversions.TempITS90toITPS68(example7.TempF);
+			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
+			Assert.True(EqualsToPrecision(example7.CompressFactor, compressFactor, 1.0e-12));
+
+            coeffs = calc.GetKCoeffs(example8.Grp,example8.Api60);
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example8.Api60, coeffs);
+			thermExpCoeff60 = calc.GetThermExpCoeff60(densITPS68, coeffs);
+			Assert.True(EqualsToPrecision(example8.ThermExpCoeff60, thermExpCoeff60, 1.0e-12));
+			tempITPS68 = Conversions.TempITS90toITPS68(example8.TempF);
+			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
+			Assert.True(EqualsToPrecision(example8.CompressFactor, compressFactor, 1.0e-12));
+
+            coeffs = calc.GetKCoeffs(example9.Grp,example9.Api60);
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example9.Api60, coeffs);
+			thermExpCoeff60 = calc.GetThermExpCoeff60(densITPS68, coeffs);
+			Assert.True(EqualsToPrecision(example9.ThermExpCoeff60, thermExpCoeff60, 1.0e-12));
+			tempITPS68 = Conversions.TempITS90toITPS68(example9.TempF);
+			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
+			Assert.True(EqualsToPrecision(example9.CompressFactor, compressFactor, 1.0e-12));
+       
+        }
 
 		[Theory]
 		[MemberData(nameof(TestDataGenerator.GetTestExamples), MemberType = typeof(TestDataGenerator))]
-		public void TestCorrectionFactors(TestData example1, TestData example2, TestData example3, TestData example4, TestData example5, TestData example6)
+		public void TestCorrectionFactors(TestData example1, TestData example2, TestData example3, TestData example4, TestData example5, TestData example6,
+                                         TestData example7, TestData example8, TestData example9)
 		{
 			Calcs calc = new Calcs();
 
@@ -363,6 +479,55 @@ namespace APIVCF
 			Assert.True(EqualsToPrecision(example6.CPL, CPL, 1.0e-12));
 			CTPL = calc.GetCTPLFromApiDegFPsig(example6.Grp, example6.Api60, example6.TempF, example6.PressPsig);
 			Assert.True(EqualsToPrecision(example6.CTPL, CTPL, 1.0e-5));
+
+			coeffs = calc.GetKCoeffs(example6.Grp);
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example6.Api60, coeffs);
+			thermExpCoeff60 = calc.GetThermExpCoeff60(densITPS68, coeffs);
+			tempITPS68 = Conversions.TempITS90toITPS68(example6.TempF);
+			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
+			CTL = calc.GetCTL(thermExpCoeff60, tempITPS68);
+			Assert.True(EqualsToPrecision(example6.CTL, CTL, 1.0e-12));
+			CPL = example6.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example6.PressPsig);
+			Assert.True(EqualsToPrecision(example6.CPL, CPL, 1.0e-12));
+			CTPL = calc.GetCTPLFromApiDegFPsig(example6.Grp, example6.Api60, example6.TempF, example6.PressPsig);
+			Assert.True(EqualsToPrecision(example6.CTPL, CTPL, 1.0e-5));
+
+            coeffs = calc.GetKCoeffs(example7.Grp,example7.Api60);
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example7.Api60, coeffs);
+			thermExpCoeff60 = calc.GetThermExpCoeff60(densITPS68, coeffs);
+			tempITPS68 = Conversions.TempITS90toITPS68(example7.TempF);
+			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
+			CTL = calc.GetCTL(thermExpCoeff60, tempITPS68);
+			Assert.True(EqualsToPrecision(example7.CTL, CTL, 1.0e-12));
+			CPL = example7.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example7.PressPsig);
+			Assert.True(EqualsToPrecision(example7.CPL, CPL, 1.0e-12));
+			CTPL = calc.GetCTPLFromApiDegFPsig(example7.Grp, example7.Api60, example7.TempF, example7.PressPsig);
+			Assert.True(EqualsToPrecision(example7.CTPL, CTPL, 1.0e-5));
+
+            coeffs = calc.GetKCoeffs(example8.Grp,example8.Api60);
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example8.Api60, coeffs);
+			thermExpCoeff60 = calc.GetThermExpCoeff60(densITPS68, coeffs);
+			tempITPS68 = Conversions.TempITS90toITPS68(example8.TempF);
+			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
+			CTL = calc.GetCTL(thermExpCoeff60, tempITPS68);
+			Assert.True(EqualsToPrecision(example8.CTL, CTL, 1.0e-12));
+			CPL = example6.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example8.PressPsig);
+			Assert.True(EqualsToPrecision(example8.CPL, CPL, 1.0e-12));
+			CTPL = calc.GetCTPLFromApiDegFPsig(example8.Grp, example8.Api60, example8.TempF, example8.PressPsig);
+			Assert.True(EqualsToPrecision(example8.CTPL, CTPL, 1.0e-5));
+
+            coeffs = calc.GetKCoeffs(example9.Grp,example9.Api60);
+			densITPS68 = Conversions.Api60ITS90tokgm3ITPS68(example9.Api60, coeffs);
+			thermExpCoeff60 = calc.GetThermExpCoeff60(densITPS68, coeffs);
+			tempITPS68 = Conversions.TempITS90toITPS68(example9.TempF);
+			compressFactor = calc.GetCompressFactor(densITPS68, tempITPS68);
+			CTL = calc.GetCTL(thermExpCoeff60, tempITPS68);
+			Assert.True(EqualsToPrecision(example9.CTL, CTL, 1.0e-12));
+			CPL = example6.PressPsig <= 0 ? 1.0 : calc.GetCPL(compressFactor, example9.PressPsig);
+			Assert.True(EqualsToPrecision(example9.CPL, CPL, 1.0e-12));
+			CTPL = calc.GetCTPLFromApiDegFPsig(example9.Grp, example9.Api60, example9.TempF, example9.PressPsig);
+			Assert.True(EqualsToPrecision(example9.CTPL, CTPL, 1.0e-5));
+
 		}
 
 		// Utility functions

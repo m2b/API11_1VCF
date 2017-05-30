@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace APIVCF
 {
     public enum VARIABLE_TYPE {DENSITY,TEMPERATURE,PRESSURE,THERMAL_EXPANSION_COEFF,CTL,SCALED_COMPRESSIBILITY_FACTOR,CPL,CTPL};
-    public enum COMMODITY_GROUP { ANY, CRUDE_OIL, FUEL_OILS, JET_FUELS, TRANSITION_ZONE, GASOLINES, LUBRICATING_OIL,GENERALIZED_REFINED_PRODUCT,LPG_NGL };
+    public enum COMMODITY_GROUP { ANY, CRUDE_OIL, LUBRICATING_OIL,GENERALIZED_REFINED_PRODUCT,LPG_NGL,FUEL_OILS=100, JET_FUELS=101, TRANSITION_ZONE=102, GASOLINES=103 };
     public enum COMPARE { INCLUDE, INSIDE}; // meaning include = in comparing 
     public enum LIQ_GAS_FLUID {EE_68_32=1,ETHANE,EP_65_35,EP_35_65,PROPANE,iBUTANE,nBUTANE,iPENTANE,nPENTANE,iHEXANE,nHEXANE,nHEPTANE }
 
@@ -89,8 +90,12 @@ namespace APIVCF
 		}
 
         // Section 11.1.6.1 Step 3 Ki Table
-        public KCoeffs GetKCoeffs(COMMODITY_GROUP cgroup)
+        public KCoeffs GetKCoeffs(COMMODITY_GROUP cgroup,double api60=0.0)
         {
+            // If density is passed, try to match commodity group to density
+            if(api60>0.0)
+			    cgroup = GetKCoeffsGroup(cgroup, api60);
+
             KCoeffs coeffs=null;
             if (!kCoeffs.TryGetValue(cgroup, out coeffs))
                 throw (new ArgumentException(String.Format("Coefficients for COMMODITY_GROUP {0} not found", cgroup)));
@@ -121,7 +126,7 @@ namespace APIVCF
                 presPsig = 0;
             checkRange(presPsig, "psig");
 
-            KCoeffs coeffs = GetKCoeffs(grp);
+            KCoeffs coeffs = GetKCoeffs(grp,api60);
 
             // Step 2 and 3  - Get corrected temp and density at ITP68 basis
             double tempITPS68 = Conversions.TempITS90toITPS68(tempF, "degF");
@@ -487,6 +492,50 @@ namespace APIVCF
 
 		#region Private methods
 
+        COMMODITY_GROUP GetKCoeffsGroup(COMMODITY_GROUP grp,double api60)
+        {
+            if (grp != COMMODITY_GROUP.GENERALIZED_REFINED_PRODUCT)
+                return grp;
+            // Try to match density range
+            var uom = uoms["api"];
+            COMMODITY_GROUP ret = COMMODITY_GROUP.ANY;
+            foreach(var limKv in uom.Limits)
+            {
+                if(((int)limKv.Key)>=100)  // Limit to refined product subgroups
+                {
+                    // Check density in range
+                    if (limKv.Value.MinCompare == COMPARE.INCLUDE)
+                    {
+                        if (api60 < limKv.Value.Min)
+                            continue;
+                    }
+                    else
+                    {
+                        if (api60 <= limKv.Value.Min)
+                            continue;
+                    }
+					// Check density in range
+                    if (limKv.Value.MaxCompare == COMPARE.INCLUDE)
+					{
+						if (api60 > limKv.Value.Max)
+							continue;
+					}
+					else
+					{
+						if (api60 >= limKv.Value.Max)
+							continue;
+					}
+                    // Found it!
+                    ret = limKv.Key;
+                    break;
+                }
+            }
+
+            if (ret == COMMODITY_GROUP.ANY)
+                throw (new ArgumentException("Density is not in the range of any of the Generalized Refined Products"));
+            return ret;
+        }
+
 		double getSatDensityAtTemp(double tempK, LiqGasProperties props)
         {
 			double tau = 1 - tempK;
@@ -531,6 +580,7 @@ namespace APIVCF
                 return;
 
             bool isLiquidGas = (grp == COMMODITY_GROUP.LPG_NGL);
+            bool isGeneralizedRefinedProduct = ((int)grp >= 100);
             // Ignore commodity if limits are for ANY commodity
             if(!isLiquidGas && uom.Limits.ContainsKey(COMMODITY_GROUP.ANY))
             {
@@ -547,7 +597,10 @@ namespace APIVCF
 
             // Check limit for commodity
             ValueLimit limit=null;
-            if(!uom.Limits.TryGetValue(grp,out limit))
+            var type = grp;
+            if (isGeneralizedRefinedProduct)
+                type = COMMODITY_GROUP.GENERALIZED_REFINED_PRODUCT;   // Needed to allow density variations within refined products group
+            if(!uom.Limits.TryGetValue(type,out limit))
                 throw (new ArgumentException("Limits for commodity group {0} not supported"));
             try
             {
