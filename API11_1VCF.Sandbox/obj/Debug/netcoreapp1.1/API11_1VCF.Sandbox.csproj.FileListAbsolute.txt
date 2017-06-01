@@ -22,3 +22,14 @@
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Sandbox/obj/Debug/netcoreapp1.1/API11_1VCF.Sandbox.AssemblyInfo.cs
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Sandbox/obj/Debug/netcoreapp1.1/API11_1VCF.Sandbox.dll
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Sandbox/obj/Debug/netcoreapp1.1/API11_1VCF.Sandbox.pdb
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\bin\Debug\netcoreapp1.1\API11_1VCF.Sandbox.deps.json
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\bin\Debug\netcoreapp1.1\API11_1VCF.Sandbox.runtimeconfig.json
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\bin\Debug\netcoreapp1.1\API11_1VCF.Sandbox.runtimeconfig.dev.json
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\bin\Debug\netcoreapp1.1\API11_1VCF.Sandbox.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\bin\Debug\netcoreapp1.1\API11_1VCF.Sandbox.pdb
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\bin\Debug\netcoreapp1.1\API11_1VCF.Lib.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\bin\Debug\netcoreapp1.1\API11_1VCF.Lib.pdb
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\obj\Debug\netcoreapp1.1\API11_1VCF.Sandbox.csprojResolveAssemblyReference.cache
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\obj\Debug\netcoreapp1.1\API11_1VCF.Sandbox.AssemblyInfo.cs
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\obj\Debug\netcoreapp1.1\API11_1VCF.Sandbox.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Sandbox\obj\Debug\netcoreapp1.1\API11_1VCF.Sandbox.pdb

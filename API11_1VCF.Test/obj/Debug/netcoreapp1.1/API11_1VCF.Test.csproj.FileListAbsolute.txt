@@ -28,3 +28,17 @@
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/obj/Debug/netcoreapp1.1/API11_1VCF.Test.AssemblyInfo.cs
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/obj/Debug/netcoreapp1.1/API11_1VCF.Test.dll
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/obj/Debug/netcoreapp1.1/API11_1VCF.Test.pdb
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\xunit.runner.utility.netstandard15.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\xunit.runner.reporters.netstandard15.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\API11_1VCF.Test.deps.json
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\API11_1VCF.Test.runtimeconfig.json
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\API11_1VCF.Test.runtimeconfig.dev.json
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\API11_1VCF.Test.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\API11_1VCF.Test.pdb
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\API11_1VCF.Lib.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\bin\Debug\netcoreapp1.1\API11_1VCF.Lib.pdb
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\obj\Debug\netcoreapp1.1\API11_1VCF.Test.csprojResolveAssemblyReference.cache
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\obj\Debug\netcoreapp1.1\API11_1VCF.Test.AssemblyInfo.cs
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\obj\Debug\netcoreapp1.1\API11_1VCF.Test.dll
+D:\Code\Repos\API11_1VCF\API11_1VCF.Test\obj\Debug\netcoreapp1.1\API11_1VCF.Test.pdb

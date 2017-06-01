@@ -1,7 +1,7 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/Users/blackie/.nuget/packages"
+      "C:\\Users\\adm-mario\\.nuget\\packages"
     ]
   }
 }
