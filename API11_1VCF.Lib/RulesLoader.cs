@@ -341,5 +341,97 @@ namespace APIVCF
 
             return props;
         }
+
+        public static List<VapPressCorrParams> GetVapPressCorrParams()
+        {
+            List<VapPressCorrParams> ret = new List<VapPressCorrParams>();
+
+            VapPressCorrParams params1 = new VapPressCorrParams()
+            {
+                RelDensityRange = new ValueLimit() { Min=0.350,Max=0.450,MaxCompare=COMPARE.INSIDE},
+                A0 = 17.5297,
+                A1 = -24.604,
+                A2=24.373,
+                B0=-6567.6,
+                B1=19322.0,
+                B2=-24693.3
+            };
+            ret.Add(params1);
+
+			VapPressCorrParams params2 = new VapPressCorrParams()
+			{
+				RelDensityRange = new ValueLimit() { Min = 0.450, Max = 0.490, MaxCompare = COMPARE.INSIDE },
+				A0 = 7.9907,
+				A1 = 7.562,
+				A2 = 0.0,
+				B0 = 1895.5,
+				B1 = -10596.9,
+				B2 = 0.0
+			};
+			ret.Add(params2);
+
+			VapPressCorrParams params3 = new VapPressCorrParams()
+			{
+				RelDensityRange = new ValueLimit() { Min = 0.490, Max = 0.510, MaxCompare = COMPARE.INSIDE },
+				A0 = -6.4747,
+				A1 = 37.083,
+				A2 = 0.0,
+				B0 = 12038.0,
+				B1 = -31296.5,
+				B2 = 0.0
+			};
+			ret.Add(params3);
+
+			VapPressCorrParams params4 = new VapPressCorrParams()
+			{
+				RelDensityRange = new ValueLimit() { Min = 0.510, Max = 0.560, MaxCompare = COMPARE.INSIDE },
+				A0 = 11.5454,
+				A1 = 1.749,
+				A2 = 0.0,
+				B0 = 1378.8,
+				B1 = -10396.1,
+				B2 = 0.0
+			};
+			ret.Add(params4);
+
+			VapPressCorrParams params5 = new VapPressCorrParams()
+			{
+				RelDensityRange = new ValueLimit() { Min = 0.560, Max = 0.585, MaxCompare = COMPARE.INSIDE },
+				A0 = 6.4827,
+				A1 = 10.790,
+				A2 = 0.0,
+				B0 = 3721.5,
+				B1 = -14579.5,
+				B2 = 0.0
+			};
+			ret.Add(params5);
+
+			VapPressCorrParams params6 = new VapPressCorrParams()
+			{
+				RelDensityRange = new ValueLimit() { Min = 0.585, Max = 0.625, MaxCompare = COMPARE.INSIDE },
+				A0 = 6.5412,
+				A1 = 10.690,
+				A2 = 0.0,
+				B0 = 6514.5,
+				B1 = -19353.9,
+				B2 = 0.0
+			};
+			ret.Add(params6);
+
+			VapPressCorrParams params7 = new VapPressCorrParams()
+			{
+				RelDensityRange = new ValueLimit() { Min = 0.625, Max = 0.676 },
+				A0 = 20.8537,
+				A1 = -12.210,
+				A2 = 0.0,
+				B0 = -6765.6,
+				B1 = 1894.3,
+				B2 = 0.0
+			};
+			ret.Add(params7);
+
+            return ret;
+        }
+
     }
 }

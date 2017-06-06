@@ -105,6 +105,10 @@ namespace APIVCF
 			d = 800;
 			Console.WriteLine("Density {0} in {1} converts to {2} in API", d, uom, Conversions.Kgm3toAPI(d));
 			Console.WriteLine("Density {0} in {1} converts to {2} in SG", d, uom, Conversions.APItoSG(Conversions.Kgm3toAPI(d)));
+            d = 0.5250;
+            uom = "SG";
+			Console.WriteLine("Density {0} in {1} converts to {2} in API", d, uom, Conversions.SGtoAPI(d));
+            Console.WriteLine("Density {0} in {1} converts to {2} in kg/m3", d, uom, Conversions.SGtoKgm3(d));
 
             // Get kCoeffs and print them
             var grp = COMMODITY_GROUP.CRUDE_OIL;
@@ -164,6 +168,15 @@ namespace APIVCF
 			lgp = calc.GetLiqGasProps(gasLiq);
 			Console.WriteLine("Liquid Gas {0} has relDens60={1}, tempCritK={2}, compCrit={3}, densCrit={4}, k1={5}, k2={6}, k1={7}, k2={8}", lgp.Fluid, lgp.relDens60, lgp.tempCritK, lgp.comprFactCrit, lgp.densCrit, lgp.k1, lgp.k2, lgp.k3, lgp.k4);
 
+            // Get Vapor Pressure Correlation Parameters
+            var vpCorrParms = RulesLoader.GetVapPressCorrParams();
+            foreach (var vpCorrParm in vpCorrParms)
+            {
+                Console.WriteLine("{0}{1}Relative Density{2}{3} - A0={4},A1={5},A2={6},B0={7},B1={8},B2={9}",
+                                  vpCorrParm.RelDensityRange.Min,vpCorrParm.RelDensityRange.MinCompare==COMPARE.INCLUDE?"<=":"<",
+								  vpCorrParm.RelDensityRange.MaxCompare == COMPARE.INCLUDE ? "<=" : "<", vpCorrParm.RelDensityRange.Max,
+                                  vpCorrParm.A0,vpCorrParm.A1,vpCorrParm.A2,vpCorrParm.B0,vpCorrParm.B1,vpCorrParm.B2);
+            }
 
 			// Validate range checks
 			double pres = 0;
@@ -403,13 +416,13 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
             grp = COMMODITY_GROUP.LPG_NGL;
 			Console.WriteLine("Testing for commodity group {0}", grp);
-            vcf = calc.GetCTPLFromAPIDegFPsigLiqGas(api,temp,pres,vapPres);  // All good
+            vcf = calc.GetCTPLFromApiDegFPsig(grp,api,temp,pres,vapPres);  // All good
 			Console.WriteLine("Values in range test completed");
 			// Temp to low
 			temp = -50.9;
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsigLiqGas(api, temp, pres, vapPres);  // All good
+				vcf = calc.GetCTPLFromApiDegFPsig(grp,api, temp, pres, vapPres);  // All good
 				Console.WriteLine("Test for low temp for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -420,7 +433,7 @@ namespace APIVCF
 			temp = 199.5;
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsigLiqGas(api, temp, pres, vapPres);  // All good
+				vcf = calc.GetCTPLFromApiDegFPsig(grp,api, temp, pres, vapPres);  // All good
 				Console.WriteLine("Test for high temp for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -432,7 +445,7 @@ namespace APIVCF
             api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsigLiqGas(api, temp, pres, vapPres);  // All good
+				vcf = calc.GetCTPLFromApiDegFPsig(grp,api, temp, pres, vapPres);  // All good
 				Console.WriteLine("Test for low density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)
@@ -444,7 +457,7 @@ namespace APIVCF
 			api = Conversions.Kgm3toAPI(dens);
 			try
 			{
-				vcf = calc.GetCTPLFromAPIDegFPsigLiqGas(api, temp, pres, vapPres);  // All good
+				vcf = calc.GetCTPLFromApiDegFPsig(grp,api, temp, pres, vapPres);  // All good
 				Console.WriteLine("Test for high density for {0} failed", grp);
 			}
 			catch (ArgumentOutOfRangeException e)

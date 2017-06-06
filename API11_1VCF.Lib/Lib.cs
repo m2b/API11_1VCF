@@ -10,6 +10,19 @@ namespace APIVCF
     public enum COMPARE { INCLUDE, INSIDE}; // meaning include = in comparing 
     public enum LIQ_GAS_FLUID {EE_68_32=1,ETHANE,EP_65_35,EP_35_65,PROPANE,iBUTANE,nBUTANE,iPENTANE,nPENTANE,iHEXANE,nHEXANE,nHEPTANE }
 
+    // API 11.2.5 Section 2 Table 1
+    public class VapPressCorrParams
+    {
+        public ValueLimit RelDensityRange;
+        public double A0;
+        public double A1;
+        public double A2;
+        public double B0;
+        public double B1;
+        public double B2;
+    }
+
+
     // API 11.2.4 Section 5.1.1.3 Table 1
     public class LiqGasProperties
     {
@@ -40,6 +53,45 @@ namespace APIVCF
 			if (!maxOk)
 				throw (new ArgumentOutOfRangeException(String.Format("Value must be less than {1}{0}", Max, MaxCompare == COMPARE.INCLUDE ? "or equal to " : "")));
         }
+
+        public bool ValueIsWithin(double val)
+        {
+			bool minOk = MinCompare == COMPARE.INSIDE ? val > Min : val >= Min;
+            if (!minOk)
+                return false;
+			bool maxOk = MaxCompare == COMPARE.INSIDE ? val < Max : val <= Max;
+            if (!maxOk)
+                return false;
+            return true;
+        }
+
+        // Override equals
+        public override bool Equals(object obj)
+        {
+            ValueLimit other = obj as ValueLimit;
+            if (other != null)
+                return false;
+            if (other.MaxCompare != this.MinCompare)
+                return false;
+            if (other.MaxCompare != this.MaxCompare)
+                return false;
+            if (other.Min != this.Min)
+                return false;
+            if (other.Max != this.Max)
+                return false;
+            return true;
+        }
+
+        // Override hashcode
+        public override int GetHashCode()
+		{
+			int hash = 17;
+			hash = hash * 23 + Min.GetHashCode();
+			hash = hash * 23 + Max.GetHashCode();
+            hash = hash * 23 + (1.0*(int)MinCompare).GetHashCode();
+            hash = hash * 23 + (1.0*(int)MaxCompare).GetHashCode();
+			return hash;
+		}
 	}
 
     public class KCoeffs
@@ -64,6 +116,7 @@ namespace APIVCF
         Dictionary<string, UnitOfMeasure> uoms = new Dictionary<string, UnitOfMeasure>();
         Dictionary<COMMODITY_GROUP, KCoeffs> kCoeffs = new Dictionary<COMMODITY_GROUP, KCoeffs>();
         Dictionary<LIQ_GAS_FLUID, LiqGasProperties> lgProps = new Dictionary<LIQ_GAS_FLUID, LiqGasProperties>();
+        List<VapPressCorrParams> vpCorrParms = new List<VapPressCorrParams>();
 
         // Constructor
         public Calcs()
@@ -71,6 +124,7 @@ namespace APIVCF
             loadUoMs();
             loadKCoeffs();
             loadLiqGasProperties();
+            loadVapCorrParams();
         }
 
         #region Public methods
@@ -109,74 +163,16 @@ namespace APIVCF
         }
 
         // Convenient method to handle all in a single call
-        public double GetCTPLFromApiDegFPsig(COMMODITY_GROUP grp, double api60, double tempF, double presPsig = 0,double vapPress=0)
+        public double GetCTPLFromApiDegFPsig(COMMODITY_GROUP grp, double api60, double tempF, double? presPsig = null,double? vapPress=null)
         {
             if (grp == COMMODITY_GROUP.LPG_NGL)
-                return GetCTPLFromAPIDegFPsigLiqGas(api60, tempF, presPsig, vapPress);
-            return GetCTPLFromApiDegFPsig(grp, api60, tempF, presPsig);
-        }
-
-        // Section 11.1.6.1  CTPL (commonly known as VCF)
-        public double GetCTPLFromApiDegFPsig(COMMODITY_GROUP grp,double api60,double tempF,double presPsig=0)
-        {
-            // Step 1 - Check range for density,temperature and pressure
-            checkRange(api60, "API", grp);
-            checkRange(tempF, "degF");
-            if (presPsig < 0)
-                presPsig = 0;
-            checkRange(presPsig, "psig");
-
-            KCoeffs coeffs = GetKCoeffs(grp,api60);
-
-            // Step 2 and 3  - Get corrected temp and density at ITP68 basis
-            double tempITPS68 = Conversions.TempITS90toITPS68(tempF, "degF");
-            double densITSP68 = Conversions.Api60ITS90tokgm3ITPS68(api60, coeffs); // kg/m3
-
-            // Step 4 - Compute coefficient of thermal expansion
-            double thermExpCoeff60 = GetThermExpCoeff60(densITSP68, coeffs);
-
-            // Step 5 - Compute temperature correction factor
-            double CTL = GetCTL(thermExpCoeff60, tempITPS68);
-
-            double CPL = 1.0; // No compensations
-            // If not ATM pressure correct for pressure
-            if(presPsig>0)
             {
-                // Step 6 - Compute compressibility factor
-                double Fp = GetCompressFactor(densITSP68, tempITPS68);
-
-                // Step 7 - Compute pressure correction
-                CPL = GetCPL(Fp, presPsig);
-			}
-
-            // Step 8
-            double CTPL = CTL * CPL;
-
-            return RoundUpAPI11_1(CTPL,"CTPL");
+                if (vapPress == null)
+                    vapPress = GetVapPressPsia(api60,tempF) + Conversions.pressAtmPsi;  // From API 11.2.5 estimation
+                return GetCTPLFromAPIDegFPsigLiqGas(api60, tempF, presPsig == null ? 0 : presPsig.Value, vapPress.Value);
+            }
+            return GetCTPLFromApiDegFPsigNONLiqGas(grp, api60, tempF, presPsig==null ? 0 : presPsig.Value);
         }
-
-
-		// API 12.2.2 - Section 11  CTPL (commonly known as VCF)
-        public double GetCTPLFromAPIDegFPsigLiqGas(double api60, double tempF, double pressPsig,double vapPressPsig)
-		{
-            // Fix press to vapPress if higher
-            if (pressPsig < vapPressPsig)
-                pressPsig = vapPressPsig;
-
-            // Determine CTL - Compute temperature correction factor
-            double CTL = GetCTLLiqGas(tempF, api60);
-
-            // Determine F - Compute compressibility factor
-            double Fp = GetCompressFactorLiqGas(tempF, api60, pressPsig, vapPressPsig, out double  A, out double B);
-
-            // Determine CPL - Compute pressure correction
-            double CPL = GetCPLLiquidGas(Fp, pressPsig, vapPressPsig);	
-
-			// Determine Combined coefficient
-			double CTPL = CTL * CPL;
-
-			return RoundUp(CTPL, -5);
-		}
 
 		// Section 11.1.3.3. Equation 14 and Section 11.1.1.6 Step 5        
         // Temperature compensation CTL
@@ -487,10 +483,117 @@ namespace APIVCF
 			return bblTankRoof;
 		}
 
+        public double GetVapPressPsia(double api60,double tempF)
+        {
+            double sg60 = Conversions.APItoSG(api60);
+
+            // Check temperature is in range
+            if(sg60>=0.425 && sg60<=0.676)
+            {
+                if (!(tempF >= -50 && tempF <= 140))
+					throw (new ArgumentException("Temperature is not in the range of Vapor Pressure estimation")); ;
+            }
+            else if(sg60>=0.350 && sg60<0.425)
+            {
+                if(!(tempF>=-50 && tempF<=(695.51*sg60-155.51)))
+					throw (new ArgumentException("Temperature is not in the range of Vapor Pressure estimation")); ;
+			}
+			else
+				throw (new ArgumentException("Relative Density is not in the range of of Vapor Pressure estimation"));
+
+            VapPressCorrParams prms = GetVapPressCorrParams(sg60);
+            double A = prms.A0 + sg60 * prms.A1 + sg60 * sg60 * prms.A2;
+            double B = prms.B0 + sg60 * prms.B1 + sg60 * sg60 * prms.B2;
+            double vapPress = Math.Exp(A + B / (tempF + 443.0));
+
+            return vapPress;
+        }
+
 
 		#endregion
 
 		#region Private methods
+
+		// Section 11.1.6.1  CTPL (commonly known as VCF)
+		double GetCTPLFromApiDegFPsigNONLiqGas(COMMODITY_GROUP grp, double api60, double tempF, double presPsig = 0)
+		{
+			// Step 1 - Check range for density,temperature and pressure
+			checkRange(api60, "API", grp);
+			checkRange(tempF, "degF");
+			if (presPsig < 0)
+				presPsig = 0;
+			checkRange(presPsig, "psig");
+
+			KCoeffs coeffs = GetKCoeffs(grp, api60);
+
+			// Step 2 and 3  - Get corrected temp and density at ITP68 basis
+			double tempITPS68 = Conversions.TempITS90toITPS68(tempF, "degF");
+			double densITSP68 = Conversions.Api60ITS90tokgm3ITPS68(api60, coeffs); // kg/m3
+
+			// Step 4 - Compute coefficient of thermal expansion
+			double thermExpCoeff60 = GetThermExpCoeff60(densITSP68, coeffs);
+
+			// Step 5 - Compute temperature correction factor
+			double CTL = GetCTL(thermExpCoeff60, tempITPS68);
+
+			double CPL = 1.0; // No compensations
+							  // If not ATM pressure correct for pressure
+			if (presPsig > 0)
+			{
+				// Step 6 - Compute compressibility factor
+				double Fp = GetCompressFactor(densITSP68, tempITPS68);
+
+				// Step 7 - Compute pressure correction
+				CPL = GetCPL(Fp, presPsig);
+			}
+
+			// Step 8
+			double CTPL = CTL * CPL;
+
+			return RoundUpAPI11_1(CTPL, "CTPL");
+		}
+
+
+		// API 12.2.2 - Section 11  CTPL (commonly known as VCF)
+		double GetCTPLFromAPIDegFPsigLiqGas(double api60, double tempF, double pressPsig, double vapPressPsig)
+		{
+			// Fix press to vapPress if higher
+			if (pressPsig < vapPressPsig)
+				pressPsig = vapPressPsig;
+
+			// Determine CTL - Compute temperature correction factor
+			double CTL = GetCTLLiqGas(tempF, api60);
+
+			// Determine F - Compute compressibility factor
+			double Fp = GetCompressFactorLiqGas(tempF, api60, pressPsig, vapPressPsig, out double A, out double B);
+
+			// Determine CPL - Compute pressure correction
+			double CPL = GetCPLLiquidGas(Fp, pressPsig, vapPressPsig);
+
+			// Determine Combined coefficient
+			double CTPL = CTL * CPL;
+
+			return RoundUp(CTPL, -5);
+		}
+
+
+
+		VapPressCorrParams GetVapPressCorrParams(double sg60)
+        {
+            VapPressCorrParams ret = null;
+            foreach(var vpCorrParm in vpCorrParms)
+            {
+                if(vpCorrParm.RelDensityRange.ValueIsWithin(sg60))
+                {
+					// Found it!
+                    ret = vpCorrParm;
+					break;
+                }
+            }
+			if (ret == null)
+				throw (new ArgumentException("Relative Density is not in the range of of Vapor Pressure estimation"));
+            return ret;
+        }
 
         COMMODITY_GROUP GetKCoeffsGroup(COMMODITY_GROUP grp,double api60)
         {
@@ -503,31 +606,12 @@ namespace APIVCF
             {
                 if(((int)limKv.Key)>=100)  // Limit to refined product subgroups
                 {
-                    // Check density in range
-                    if (limKv.Value.MinCompare == COMPARE.INCLUDE)
+                    if(limKv.Value.ValueIsWithin(api60))
                     {
-                        if (api60 < limKv.Value.Min)
-                            continue;
-                    }
-                    else
-                    {
-                        if (api60 <= limKv.Value.Min)
-                            continue;
-                    }
-					// Check density in range
-                    if (limKv.Value.MaxCompare == COMPARE.INCLUDE)
-					{
-						if (api60 > limKv.Value.Max)
-							continue;
+						// Found it!
+						ret = limKv.Key;
+						break;
 					}
-					else
-					{
-						if (api60 >= limKv.Value.Max)
-							continue;
-					}
-                    // Found it!
-                    ret = limKv.Key;
-                    break;
                 }
             }
 
@@ -561,6 +645,12 @@ namespace APIVCF
 		{
             lgProps = RulesLoader.GetLiqGasProperties();
 		}
+
+        void loadVapCorrParams()
+        {
+            vpCorrParms = RulesLoader.GetVapPressCorrParams();
+        }
+
 
         double getCriticalTemperature(double api60)
         {
