@@ -3703,15 +3703,15 @@
     ]
   },
   "packageFolders": {
-    "/Users/blackie/.nuget/packages/": {}
+    "C:\\Users\\adm-mario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/API11_1VCF.Lib.csproj",
+      "projectUniqueName": "D:\\Code\\Repos\\API11_1VCF\\API11_1VCF.Lib\\API11_1VCF.Lib.csproj",
       "projectName": "API11_1VCF.Lib",
-      "projectPath": "/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/API11_1VCF.Lib.csproj",
-      "outputPath": "/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj",
+      "projectPath": "D:\\Code\\Repos\\API11_1VCF\\API11_1VCF.Lib\\API11_1VCF.Lib.csproj",
+      "outputPath": "D:\\Code\\Repos\\API11_1VCF\\API11_1VCF.Lib\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netstandard1.4"
@@ -3727,7 +3727,8 @@
         "dependencies": {
           "NETStandard.Library": {
             "target": "Package",
-            "version": "1.6.1"
+            "version": "1.6.1",
+            "autoReferenced": true
           }
         }
       }
