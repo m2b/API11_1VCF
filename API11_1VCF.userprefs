@@ -1,25 +1,11 @@
-﻿<Properties StartupConfiguration="{1AE2940F-0BD9-49C9-A3BB-67969D3D0F09}|Default">
+﻿<Properties StartupConfiguration="{1BB50CDE-D112-4B80-97ED-DEF61486EFCD}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="API11_1VCF.git Status">
     <Files>
-      <File FileName="API11_1VCF.Lib/Lib.cs" Line="580" Column="9" />
-      <File FileName="API11_1VCF.Sandbox/Program.cs" Line="463" Column="39" />
-      <File FileName="API11_1VCF.Lib/RulesLoader.cs" Line="368" Column="18" />
-      <File FileName="API11_1VCF.Test/DensityCalcsTest.cs" Line="53" Column="8" />
-      <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" Line="515" Column="63" />
-      <File FileName="API11_1VCF.Lib/Conversions.cs" Line="83" Column="40" />
-      <File FileName="API11_1VCF.Test/FloatingRoofCalcsTest.cs" Line="64" Column="46" />
-      <File FileName="API11_1VCF.Test/CTLAPIDegFLiqGasTests.cs" Line="102" Column="13" />
-      <File FileName="LPGNGLSandbox/Program.cs" Line="30" Column="50" />
-      <File FileName="API11_1VCF.Test/CTPLFromAPIDegFPsigLiqGasTests.cs" Line="83" Column="137" />
+      <File FileName="../itvizion/tools/ITVizion.Tools.Core.Logging/Log4NetProvider.cs" Line="25" Column="23" />
+      <File FileName="../itvizion/tools/ITVizion.Tools.Core.Logging/Log4NetExtensions.cs" Line="10" Column="32" />
+      <File FileName="../itvizion/tools/ITVizion.Tools.Core.Logging/Log4NetLogger.cs" Line="24" Column="54" />
       <File FileName="API11_1VCF.git Status" />
     </Files>
-    <Pads>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="API11_1VCF" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -29,9 +15,16 @@
       <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/FloatingRoofCalcsTest.cs" relfile="API11_1VCF.Test/FloatingRoofCalcsTest.cs" line="67" column="1" />
       <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" relfile="API11_1VCF.Test/CTPLFromAPIDegFPsigTests.cs" line="244" column="1" />
       <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Test/CTPLFromAPIDegFPsigLiqGasTests.cs" relfile="API11_1VCF.Test/CTPLFromAPIDegFPsigLiqGasTests.cs" line="89" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/ReflectionSandbox/Program.cs" relfile="ReflectionSandbox/Program.cs" line="24" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtilsSandbox/Program.cs" relfile="MeasureTapeUtilsSandbox/Program.cs" line="228" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/Utils.cs" relfile="MeasureTapeUtils/Utils.cs" line="724" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtilsSandbox/Program.cs" relfile="MeasureTapeUtilsSandbox/Program.cs" line="48" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils.Test/MeasureTapeFtInFractTests.cs" relfile="MeasureTapeUtils.Test/MeasureTapeFtInFractTests.cs" line="261" column="1" />
+      <Breakpoint file="/Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/Utils.cs" relfile="MeasureTapeUtils/Utils.cs" line="708" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MeasureTapeUtils.WebApi PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
   <DisabledProjects>
     <String>APIVCFLib/API11_1VCF.csproj</String>

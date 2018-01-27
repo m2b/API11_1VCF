@@ -1,0 +1,4 @@
+{
+  "MigrationTableCommand": "CREATE TABLE [MigrationLog] ([ID] int NOT NULL,[Version] varchar(20) NOT NULL,[Description] varchar(128) DEFAULT NULL,[Completed] datetime2 NOT NULL,PRIMARY KEY ([ID]))",
+  "Migrations": []
+}

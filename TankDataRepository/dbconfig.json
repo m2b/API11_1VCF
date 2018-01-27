@@ -1,0 +1,112 @@
+{
+    "ConnectionString": "Server=tcp:localhost,1433;MultipleActiveResultSets=true;User Id=sa;Password=Panama\\!123",
+    "DatabaseName": "TankData",
+    "DateTimeFormat": "yyyy-MM-dd HH:mm:ss.fff",
+    "TableNames": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "VCGroup",
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "ShellMaterial",
+        "APIVCF.Stock, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "Stock"
+    },
+    "ExistDatabaseCommand": "SELECT 1 where DB_ID('{0}') is not null",
+    "CreateDatabaseCommand": "CREATE DATABASE {0}",
+    "ExistTableCommand": "SELECT 1 Where OBJECT_ID('TankData.dbo.' + '{0}') is not null ",
+    "CreateTableCommands": {
+        "VCGroup": "CREATE TABLE [VCGroup] ([ID] bigint NOT NULL IDENTITY (1,1),[Name] nvarchar(32) NOT NULL DEFAULT 'NONE',[Created] datetime2 NOT NULL DEFAULT CURRENT_TIMESTAMP,[CreateUser] nvarchar(64) NOT NULL,[Updated] datetime2 NOT NULL,[UpdateUser] nvarchar(64) NOT NULL,[Deleted] datetime2 DEFAULT NULL,[DeleteUser] nvarchar(64) DEFAULT NULL,PRIMARY KEY ([ID]),CONSTRAINT [Name_VCGroup] UNIQUE([Name]))",
+        "ShellMaterial": "CREATE TABLE [ShellMaterial] ([ID] bigint NOT NULL IDENTITY (1,1),[Name] nvarchar(32) NOT NULL DEFAULT 'NONE',[ThermExpCoeff] float(53) NOT NULL,[Created] datetime2 NOT NULL DEFAULT CURRENT_TIMESTAMP,[CreateUser] nvarchar(64) NOT NULL,[Updated] datetime2 NOT NULL,[UpdateUser] nvarchar(64) NOT NULL,[Deleted] datetime2 DEFAULT NULL,[DeleteUser] nvarchar(64) DEFAULT NULL,PRIMARY KEY ([ID]),CONSTRAINT [Name_ShellMaterial] UNIQUE([Name]))",
+        "Stock": "CREATE TABLE [Stock] ([ID] bigint NOT NULL IDENTITY (1,1),[VCGroupID] bigint NOT NULL,[Abbr] nvarchar(16) NOT NULL DEFAULT 'NONE',[Name] nvarchar(32) NOT NULL DEFAULT 'NONE',[Created] datetime2 NOT NULL DEFAULT CURRENT_TIMESTAMP,[CreateUser] nvarchar(64) NOT NULL,[Updated] datetime2 NOT NULL,[UpdateUser] nvarchar(64) NOT NULL,[Deleted] datetime2 DEFAULT NULL,[DeleteUser] nvarchar(64) DEFAULT NULL,PRIMARY KEY ([ID]),CONSTRAINT [Name_Stock] UNIQUE([Name]),CONSTRAINT [Stock_VCGroup] FOREIGN KEY ([VCGroupID]) REFERENCES [VCGroup] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION)"
+    },
+    "ExistCommands": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "select id from vcgroup where name='{0}' or id='{1}'",
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "select id from shellmaterial where name='{0}' or id='{1}'",
+        "APIVCF.Stock, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "select id from stock where name='{0}' or id='{1}' or abbr='{2}'"
+    },
+    "CreateCommands": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "insert into vcgroup(id,name,created,createuser,updated,updateuser) values('{0}','{1}','{2}','{3}','{4}','{5}')",
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "insert into shellmaterial(id,name,thermexpcoeff,created,createuser,updated,updateuser) values('{0}','{1}','{2}',{3},'{4}','{5}','{6}')",
+        "APIVCF.Stock, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "insert into stock(id,name,abbr,created,createuser,updated,updateuser) values('{0}','{1}','{2}',{3},'{4}','{5}','{6}')"
+    },
+    "UpdateCommands": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "update vcgroup set name='{0}',updated='{1}',updateuser='{2}' where id='{3}'",
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "update shellmaterial set name='{0}',thermexpcoeff={1},updated='{2}',updateuser='{3}' where id='{4}'",
+    },
+    "DeleteCommands": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "update vcgroup set deleted='{0}',deleteuser='{1}' where id='{2}'",
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "update shellmaterial set deleted='{0}',deleteuser='{1}' where id='{2}'"
+        "APIVCF.Stock, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "update stock set deleted='{0}',deleteuser='{1}' where id='{2}'"
+    },
+    "ExistCommandBindParameters": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Name",
+            "ID"
+        ],
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Name",
+            "ID"
+        ],
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Name",
+            "ID",
+            "Abbreviation"
+        ]
+    },
+    "CreateCommandBinParameters": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "ID",
+            "Name",
+            "Created",
+            "CreateUser",
+            "Updated",
+            "UpdateUser"
+        ],
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "ID",
+            "Name",
+            "ThermalExpansionCoeff",
+            "Created",
+            "CreateUser",
+            "Updated",
+            "UpdateUser"
+        ],
+        "APIVCF.Stock, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "ID",
+            "Name",
+            "Abbr",
+            "Created",
+            "CreateUser",
+            "Updated",
+            "UpdateUser"
+        ]
+    },
+    "UpdateCommandBindParameters": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Name",
+            "Updated",
+            "UpdateUser",
+            "ID"
+        ],
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Name",
+            "ThermalExpansionCoeff",
+            "Updated",
+            "UpdateUser",
+            "ID"
+        ]    
+    },
+    "DeleteCommandBindParameters": {
+        "APIVCF.VolumeCorrectionGroup, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Deleted",
+            "DeleteUser",
+            "ID"
+        ],
+        "APIVCF.ShellMaterial, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Deleted",
+            "DeleteUser",
+            "ID"
+        ],
+        "APIVCF.Stock, TankDataRepository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": [
+            "Deleted",
+            "DeleteUser",
+            "ID"
+        ]
+    }
+}

@@ -1,0 +1,86 @@
+{DEBUG} 20180106 10:32:08 468 [2] Microsoft.AspNetCore.Hosting.Internal.WebHost - Hosting starting
+{DEBUG} 20180106 10:32:08 914 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75R" started.
+{DEBUG} 20180106 10:32:08 930 [2] Microsoft.AspNetCore.Hosting.Internal.WebHost - Hosting started
+{DEBUG} 20180106 10:32:09 883 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75R" received FIN.
+{DEBUG} 20180106 10:32:09 891 [4] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75R" disconnecting.
+{DEBUG} 20180106 10:32:09 900 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75R" sending FIN.
+{DEBUG} 20180106 10:32:09 905 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75R" sent FIN with status "0".
+{DEBUG} 20180106 10:32:09 909 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75R" stopped.
+{DEBUG} 20180106 10:32:10 119 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75S" started.
+{INFO} 20180106 10:32:10 568 [11] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:53840/  
+{DEBUG} 20180106 10:32:10 947 [11] Microsoft.AspNetCore.Builder.RouterMiddleware - Request did not match any routes.
+{DEBUG} 20180106 10:32:11 022 [11] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75S" completed keep alive response.
+{INFO} 20180106 10:32:11 038 [11] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request finished in 506.594ms 404 
+{INFO} 20180106 10:32:11 091 [3] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:53840/favicon.ico  
+{DEBUG} 20180106 10:32:11 099 [3] Microsoft.AspNetCore.Builder.RouterMiddleware - Request did not match any routes.
+{DEBUG} 20180106 10:32:11 099 [3] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6F5OB75S" completed keep alive response.
+{INFO} 20180106 10:32:11 100 [3] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request finished in 8.807ms 404 
+{DEBUG} 20180106 10:36:41 449 [2] Microsoft.AspNetCore.Hosting.Internal.WebHost - Hosting starting
+{DEBUG} 20180106 10:36:41 833 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGJ" started.
+{DEBUG} 20180106 10:36:41 944 [2] Microsoft.AspNetCore.Hosting.Internal.WebHost - Hosting started
+{DEBUG} 20180106 10:36:42 819 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGJ" received FIN.
+{DEBUG} 20180106 10:36:42 826 [4] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGJ" disconnecting.
+{DEBUG} 20180106 10:36:42 836 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGJ" sending FIN.
+{DEBUG} 20180106 10:36:42 842 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGJ" sent FIN with status "0".
+{DEBUG} 20180106 10:36:42 853 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGJ" stopped.
+{DEBUG} 20180106 10:36:42 994 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGK" started.
+{INFO} 20180106 10:36:43 456 [3] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:53840/  
+{DEBUG} 20180106 10:36:43 862 [3] Microsoft.AspNetCore.Builder.RouterMiddleware - Request did not match any routes.
+{DEBUG} 20180106 10:36:43 938 [3] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGK" completed keep alive response.
+{INFO} 20180106 10:36:43 951 [3] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request finished in 540.107ms 404 
+{DEBUG} 20180106 10:36:49 494 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGL" started.
+{DEBUG} 20180106 10:36:49 499 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" started.
+{DEBUG} 20180106 10:36:49 499 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGL" received FIN.
+{DEBUG} 20180106 10:36:49 524 [4] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGL" disconnecting.
+{DEBUG} 20180106 10:36:49 524 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGL" sending FIN.
+{DEBUG} 20180106 10:36:49 525 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGL" sent FIN with status "0".
+{INFO} 20180106 10:36:49 525 [3] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:53840/api/TapeUtils/objects application/json 26
+{DEBUG} 20180106 10:36:49 525 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGL" stopped.
+{DEBUG} 20180106 10:36:49 561 [3] Microsoft.AspNetCore.Routing.Tree.TreeRouter - Request successfully matched the route with name '(null)' and template 'api/TapeUtils/objects'.
+{DEBUG} 20180106 10:36:49 638 [3] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executing action MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects (MeasureTapeUtils.WebApi)
+{DEBUG} 20180106 10:36:49 824 [3] Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinder - Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter' for content type 'application/json'.
+{INFO} 20180106 10:36:50 019 [3] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executing action method MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects (MeasureTapeUtils.WebApi) with arguments (System.String[]) - ModelState is Valid
+{DEBUG} 20180106 10:36:50 055 [3] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executed action method MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects (MeasureTapeUtils.WebApi), returned result Microsoft.AspNetCore.Mvc.ObjectResult.
+{DEBUG} 20180106 10:36:50 080 [3] Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor - No information found on request to perform content negotiation.
+{DEBUG} 20180106 10:36:50 085 [3] Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor - Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.JsonOutputFormatter' and content type 'application/json' to write the response.
+{INFO} 20180106 10:36:50 086 [3] Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor - Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+{INFO} 20180106 10:36:50 209 [3] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executed action MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects (MeasureTapeUtils.WebApi) in 568.778ms
+{DEBUG} 20180106 10:36:50 223 [3] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" completed keep alive response.
+{INFO} 20180106 10:36:50 224 [3] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request finished in 699.938ms 200 application/json; charset=utf-8
+{INFO} 20180106 10:37:54 027 [13] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:53840/api/TapeUtils/decimalvals application/json 26
+{DEBUG} 20180106 10:37:54 041 [13] Microsoft.AspNetCore.Routing.Tree.TreeRouter - Request successfully matched the route with name '(null)' and template 'api/TapeUtils/decimalvals'.
+{DEBUG} 20180106 10:37:54 042 [13] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executing action MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetDecimalValues (MeasureTapeUtils.WebApi)
+{DEBUG} 20180106 10:37:54 050 [13] Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinder - Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter' for content type 'application/json'.
+{INFO} 20180106 10:37:54 050 [13] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executing action method MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetDecimalValues (MeasureTapeUtils.WebApi) with arguments (System.String[]) - ModelState is Valid
+{ERROR} 20180106 10:37:54 942 [13] MeasureTapeUtils.WebApi.Controllers.TapeUtilsController - Error getting decimal values from measure strings
+System.ArgumentException: String must be in the format feet-in-fraction where feet can be 0 or greater, inches can be 0 to 11 and fraction must be one of 1/32...31/32 or 1/16..15/16 or 1/8...7/8 or 1/4...3/4 or 1/2
+   at APIVCF.TapeMeasureFtInFract.set_StrMeasure(String value) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/Classes.cs:line 515
+   at APIVCF.TapeMeasureFtInFract..ctor(String measure) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/Classes.cs:line 651
+   at APIVCF.TapeMeasureAPI.GetDecimalValues(String[] measures) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/TapMeasureAPI.cs:line 119
+   at MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetDecimalValues(String[] measures) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils.WebApi/Controllers/TapeUtilsController.cs:line 81
+{INFO} 20180106 10:37:55 359 [13] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executed action MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetDecimalValues (MeasureTapeUtils.WebApi) in 1309.51ms
+{DEBUG} 20180106 10:37:55 681 [13] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" completed keep alive response.
+{INFO} 20180106 10:37:55 688 [13] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request finished in 1660.777ms 500 application/json
+{DEBUG} 20180106 10:38:38 944 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGK" received FIN.
+{DEBUG} 20180106 10:38:38 953 [18] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGK" disconnecting.
+{DEBUG} 20180106 10:38:38 962 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGK" sending FIN.
+{DEBUG} 20180106 10:38:38 962 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGK" sent FIN with status "0".
+{DEBUG} 20180106 10:38:38 962 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGK" stopped.
+{INFO} 20180106 10:38:41 623 [19] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:53840/api/TapeUtils/objects application/json 26
+{DEBUG} 20180106 10:38:41 631 [19] Microsoft.AspNetCore.Routing.Tree.TreeRouter - Request successfully matched the route with name '(null)' and template 'api/TapeUtils/objects'.
+{DEBUG} 20180106 10:38:41 633 [19] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executing action MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects (MeasureTapeUtils.WebApi)
+{DEBUG} 20180106 10:38:41 633 [19] Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinder - Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter' for content type 'application/json'.
+{INFO} 20180106 10:38:41 634 [19] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executing action method MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects (MeasureTapeUtils.WebApi) with arguments (System.String[]) - ModelState is Valid
+{ERROR} 20180106 10:38:41 988 [19] MeasureTapeUtils.WebApi.Controllers.TapeUtilsController - Error getting objects from measure strings
+System.ArgumentException: String must be in the format feet-in-fraction where feet can be 0 or greater, inches can be 0 to 11 and fraction must be one of 1/32...31/32 or 1/16..15/16 or 1/8...7/8 or 1/4...3/4 or 1/2
+   at APIVCF.TapeMeasureFtInFract.set_StrMeasure(String value) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/Classes.cs:line 515
+   at APIVCF.TapeMeasureFtInFract..ctor(String measure) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/Classes.cs:line 651
+   at APIVCF.TapeMeasureAPI.GetObjects(String[] measures) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils/TapMeasureAPI.cs:line 132
+   at MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects(String[] measures) in /Users/blackie/Documents/code/csharp/API11_1VCF.git/MeasureTapeUtils.WebApi/Controllers/TapeUtilsController.cs:line 49
+{INFO} 20180106 10:38:42 406 [19] Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker - Executed action MeasureTapeUtils.WebApi.Controllers.TapeUtilsController.GetObjects (MeasureTapeUtils.WebApi) in 772.787ms
+{DEBUG} 20180106 10:38:42 620 [19] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" completed keep alive response.
+{INFO} 20180106 10:38:42 620 [19] Microsoft.AspNetCore.Hosting.Internal.WebHost - Request finished in 996.986ms 500 application/json
+{DEBUG} 20180106 10:40:42 970 [21] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" disconnecting.
+{DEBUG} 20180106 10:40:42 977 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" sending FIN.
+{DEBUG} 20180106 10:40:42 978 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" sent FIN with status "0".
+{DEBUG} 20180106 10:40:42 978 [KestrelThread - libuv] Microsoft.AspNetCore.Server.Kestrel - Connection id "0HLAL6HN33PGM" stopped.

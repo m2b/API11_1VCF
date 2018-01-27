@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+     <TargetFramework>netstandard2.0</TargetFramework> 
+     <NETStandardImplicitPackageVersion>2.0.0-preview1-25301-01</NETStandardImplicitPackageVersion> 
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\itvizion\viziondi.git\ITVizion.VizionDI.Definitions\ITVizion.VizionDI.Definitions.csproj" />
+    <ProjectReference Include="..\API11_1VCF.Lib\API11_1VCF.Lib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="dbmigrations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="dbconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

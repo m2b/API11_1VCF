@@ -1,0 +1,59 @@
+{
+    "ConnectionString": "Server=tcp:localhost,1433;MultipleActiveResultSets=true;User Id=sa;Password=Panama\\!123",
+    "DatabaseName": "DITest",
+    "DateTimeFormat": "yyyy-MM-dd HH:mm:ss.fff",
+    "TableNames": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": "Lookup"
+    },
+    "ExistDatabaseCommand": "SELECT 1 where DB_ID('{0}') is not null",
+    "CreateDatabaseCommand": "CREATE DATABASE {0}",
+    "ExistTableCommand": "SELECT 1 Where OBJECT_ID('IntegrationRegistry.dbo.' + '{0}') is not null ",
+    "CreateTableCommands": {
+        "Lookup": "CREATE TABLE [Lookup] ([ID] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',[Name] varchar(32) NOT NULL DEFAULT 'NONE',[Description] varchar(128) NULL,[Created] datetime2 NOT NULL DEFAULT CURRENT_TIMESTAMP,[CreateUser] varchar(64) NOT NULL,[Updated] datetime2 NOT NULL,[UpdateUser] varchar(64) NOT NULL,[Deleted] datetime2 DEFAULT NULL,[DeleteUser] varchar(64) DEFAULT NULL,PRIMARY KEY ([ID]),CONSTRAINT [Name_Lookup] UNIQUE([Name]))"
+    },
+    "ExistCommands": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": "select id from lookup where name='{0}' or id='{1}'",
+    },
+    "CreateCommands": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": "insert into lookup(id,name,description,created,createuser,updated,updateuser) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
+    },
+    "UpdateCommands": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": "update lookup set name='{0}',description='{1}',updated='{2}',updateuser='{3}' where id='{4}'",
+    },
+    "DeleteCommands": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": "update lookup set deleted='{0}',deleteuser='{1}' where id='{2}'"
+    },
+    "ExistCommandBindParameters": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": [
+            "Name",
+            "ID"
+        ]
+    },
+    "CreateCommandBinParameters": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": [
+            "ID",
+            "Name",
+            "Description",
+            "Created",
+            "CreateUser",
+            "Updated",
+            "UpdateUser"
+        ]
+    },
+    "UpdateCommandBindParameters": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": [
+            "Name",
+            "Description",
+            "Updated",
+            "UpdateUser",
+            "ID"
+        ]
+    },
+    "DeleteCommandBindParameters": {
+        "ITVizion.VizionDI.Definitions.Lookup, ITVizion.VizionDI.Definitions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ff9f1f4e3475a64e": [
+            "Deleted",
+            "DeleteUser",
+            "ID"
+        ]
+    }
+}

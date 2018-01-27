@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework> 
+    <NETStandardImplicitPackageVersion>2.0.0-preview1-25301-01</NETStandardImplicitPackageVersion> 
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="dbconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\itvizion\viziondi.git\ITVizion.VizionDI.ADOtoPoco\ITVizion.VizionDI.ADOtoPoco.csproj" />
+    <ProjectReference Include="..\..\itvizion\viziondi.git\ITVizion.VizionDI.Definitions\ITVizion.VizionDI.Definitions.csproj" />
+  </ItemGroup>
+</Project>

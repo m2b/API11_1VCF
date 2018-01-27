@@ -6,6 +6,16 @@
 /Users/blackie/Documents/code/API11_1VCF/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.AssemblyInfo.cs
 /Users/blackie/Documents/code/API11_1VCF/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.dll
 /Users/blackie/Documents/code/API11_1VCF/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.pdb
+<<<<<<< HEAD
+=======
+D:/Code/Repos/API11_1VCF/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.deps.json
+D:/Code/Repos/API11_1VCF/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.dll
+D:/Code/Repos/API11_1VCF/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.pdb
+D:/Code/Repos/API11_1VCF/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.AssemblyInfo.cs
+D:/Code/Repos/API11_1VCF/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.dll
+D:/Code/Repos/API11_1VCF/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.pdb
+D:/Code/Repos/API11_1VCF/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.csprojResolveAssemblyReference.cache
+>>>>>>> origin/master
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.deps.json
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.dll
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/bin/Debug/netstandard1.4/API11_1VCF.Lib.pdb
@@ -14,14 +24,4 @@
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.AssemblyInfo.cs
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.dll
 /Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.pdb
-<<<<<<< HEAD
-=======
-/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.csprojResolveAssemblyReference.cache
-D:\Code\Repos\API11_1VCF\API11_1VCF.Lib\bin\Debug\netstandard1.4\API11_1VCF.Lib.deps.json
-D:\Code\Repos\API11_1VCF\API11_1VCF.Lib\bin\Debug\netstandard1.4\API11_1VCF.Lib.dll
-D:\Code\Repos\API11_1VCF\API11_1VCF.Lib\bin\Debug\netstandard1.4\API11_1VCF.Lib.pdb
-D:\Code\Repos\API11_1VCF\API11_1VCF.Lib\obj\Debug\netstandard1.4\API11_1VCF.Lib.AssemblyInfo.cs
-D:\Code\Repos\API11_1VCF\API11_1VCF.Lib\obj\Debug\netstandard1.4\API11_1VCF.Lib.dll
-D:\Code\Repos\API11_1VCF\API11_1VCF.Lib\obj\Debug\netstandard1.4\API11_1VCF.Lib.pdb
-D:\Code\Repos\API11_1VCF\API11_1VCF.Lib\obj\Debug\netstandard1.4\API11_1VCF.Lib.csprojResolveAssemblyReference.cache
->>>>>>> origin/master
+/Users/blackie/Documents/code/csharp/API11_1VCF.git/API11_1VCF.Lib/obj/Debug/netstandard1.4/API11_1VCF.Lib.AssemblyInfoInputs.cache
